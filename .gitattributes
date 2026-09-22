@@ -1,0 +1,4 @@
+*.owl text eol=lf
+*.mjs text eol=lf
+*.java text eol=lf
+*.md text eol=lf

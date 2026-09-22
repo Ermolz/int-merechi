@@ -1,245 +1,282 @@
-# Практичне заняття № 2
+# Практичне заняття № 3
 
-**Реалізація концептуальної моделі в Protégé**  
-**Варіант 1 — Конфігуратор комплектуючих ПК (PC Builder)**  
-Дата виконання: 12.09.2026
+**Формальні умови та обмеження OWL-онтології**
+**Варіант 1 — Конфігуратор комплектуючих ПК (PC Builder)**
+Дата: 22.09.2026
 
-## Результат і статус перевірки
+## Результат
 
-Створено [PC_Builder.owl](PC_Builder.owl) — OWL 2 DL-онтологію у форматі RDF/XML. Вона містить **6 класів, 4 Object Properties, 3 Data Properties, 18 різних Individuals, 20 явних об’єктних зв’язків та 18 числових значень**.
+Доповнено [PC_Builder.owl](PC_Builder.owl), створений на практичному занятті № 2. Усі 18 вихідних індивідів, їхні 20 об’єктних зв’язків і 18 числових значень збережено. Нова версія містить **20 класів, 10 Object Properties, 4 Data Properties, 3 власні типи даних, 18 індивідів, 20 явних об’єктних та 22 явні інформаційні твердження**. 14 нових класів є визначеними через `EquivalentClasses`; клас `Socket` також визначено переліком індивідів.
 
-Файл успішно прочитаний OWLAPI та перевірений справжнім reasoner **HermiT з установленого комплекту Protégé 5.6.9**, запущеним окремо від графічного інтерфейсу. Онтологія узгоджена, невиконуваних іменованих класів немає. Повний результат: [журнал перевірки](validation/reasoner-output.txt).
+**HermiT реально запущено через OWLAPI поза графічним інтерфейсом Protégé.** Онтологія узгоджена; порушень OWL 2 DL і невиконуваних іменованих класів немає. Використано локальні бібліотеки Protégé: OWLAPI 4.5.29; файл HermiT `org.semanticweb.hermit-1.4.3.456.jar`; версія, яку повідомляє reasoner, — `1.4.1.432`.
 
-**Готовий OWL відкрито у Protégé 5.6.9.** Файл передано програмі як аргумент запуску. Computer Use підтвердив вікно `pc-builder` з точним шляхом до `PC_Builder.owl`, а журнал Protégé зафіксував успішне завантаження о 11:13:28. Доказ: [витяг із журналу Protégé](validation/protege-load-evidence.txt).
+Докази: [повний журнал](validation/reasoner-output.txt), [виведена ієрархія](validation/inferred-hierarchy.txt), [екземпляри класів](validation/inferred-instances.txt), [64 об’єктні зв’язки](validation/inferred-relations.txt), [SHA-256 перевіреного файла](validation/owl-sha256.txt). Файл OWL не змінювався під час перевірки.
 
-**OntoGraf перевірено за зображенням, наданим користувачем.** На графі видно всі 6 класів предметної області та всі 18 індивідів. Окремі знімки підтверджують списки 4 Object Properties і 3 Data Properties, ієрархію класів, 4 процесори та значення `hasPrice = 80.00`, `hasWattage = 650` для `PSU_650W`. Чотири оригінальні зображення збережено в папці `screenshots`.
+## Основа й межі моделі
 
-Самостійне захоплення зображень через Computer Use не працює через помилку `SetIsBorderRequired failed: Интерфейс не поддерживается (0x80004002)`. Користувач виконав дії в OntoGraf і надав кадри, які було переглянуто та збережено без редагування. **Запуск HermiT саме в GUI залишається непідтвердженим**: надіслана раніше команда `Ctrl+R` не дала перевіреного результату, а нові кадри не показують стан reasoner. Перевірка тим самим установленим HermiT поза GUI успішна.
+Предметна область — та сама навчальна модель PC Builder. Конфігурація складається з одного процесора, однієї материнської плати й одного блока живлення. Комплектуючі є записами каталогу: один запис БП дозволено використовувати у кількох конфігураціях. GPU, RAM, накопичувачі та інші частини ПК до цього варіанта не входять.
 
-Повторна спроба після розгортання Protégé на весь екран також завершилася помилкою `0x80004002`. За побажанням користувача з OWL видалено всі 11 `rdfs:comment`, текстову назву та `owl:versionInfo`. Збережено ідентифікатори онтології, її логічну структуру й усі дані. Оновлений файл повторно пройшов HermiT. Щоб завантажити очищену версію у вже відкрите вікно, вибрати `File → Reload`.
+Надане завдання містить приклади `Equipment/hasState/EmergencyState`, але не задає окремого переліку Defined Classes для PC Builder. Тому конструкції адаптовано до власної предметної області: сокети, пороги TDP/Wattage, призначення та сокетна сумісність конфігурацій. Пороги `65 W` і `650 W`, а також три значення призначення — прийняті навчальні умови, не характеристики реальних серійних виробів.
 
-## Вихідна модель та прийняті рішення
+IRI онтології: `https://example.org/pc-builder`. Version IRI: `https://example.org/pc-builder/2.0`. Зовнішніх імпортів немає.
 
-Основою є наданий у повідомленні опис варіанта 1 практичного заняття № 1. Окремого файла попередньої UML-моделі у робочій папці не було. Тому перенесено саме наведені користувачем класи та властивості; індивіди й числові значення розроблено для цієї практичної.
+## Відповідність завданню
 
-Усі комплектуючі — **умовні навчальні об’єкти**. Назви сокетів позначають типи інтерфейсів, а назви комплектуючих не є твердженнями про конкретні серійні товари. TDP та Wattage задані у ватах. Ціни задані в умовних грошових одиницях і не є ринковими цінами.
+| Вимога | Реалізація |
+|---|---|
+| Domain/Range для Object Properties | Усі 10 властивостей мають явно задані області |
+| Domain/Range для Data Properties | Усі 4 властивості мають області та формальні діапазони значень |
+| Власний тип даних / enumeration | `ConfigurationPurpose = {"office", "general", "performance"}`; додатково `PositiveWattage` та `NonNegativePrice` |
+| Характеристики властивостей | Functional, InverseFunctional, Asymmetric, Irreflexive у відповідних місцях |
+| Взаємно обернені властивості | 5 пар; зворотні факти отримує HermiT |
+| Disjoint Classes | Дві групи базових класів; додаткову несумісність платформ виводить HermiT |
+| someValuesFrom / allValuesFrom | Обов’язкові сокети та компоненти; дозволені типи компонентів |
+| min / max / exact | Від 3 до 3 компонентів; рівно один CPU, Motherboard, PowerSupply та необхідні значення |
+| Defined Classes | 14 нових класів через еквівалентність виразам |
+| Закриття класу індивідами | `Socket ≡ {Socket_AM4, Socket_AM5, Socket_LGA1700}` |
+| Перевірка Individuals | Логічна перевірка HermiT та окрема перевірка повноти явних даних |
+| Запуск HermiT або Pellet | Виконано HermiT через OWLAPI |
+| Аналіз inferred class hierarchy | Наведено нижче й збережено безпосередній результат запиту до reasoner |
 
-IRI онтології: `https://example.org/pc-builder`  
-Префікс сутностей: `https://example.org/pc-builder#`  
-Версія: `https://example.org/pc-builder/1.0`  
-Онтологія самодостатня, зовнішніх імпортів немає; IRI не вимагає завантаження вебсторінки.
+## Object Properties
 
-## Реалізація кожного пункту завдання
+| Властивість | Domain | Range | Обернена |
+|---|---|---|---|
+| `hasSocket` | `CPU or Motherboard` | `Socket` | `isSocketOf` |
+| `hasCPU` | `PCConfiguration` | `CPU` | `isCPUOf` |
+| `hasMotherboard` | `PCConfiguration` | `Motherboard` | `isMotherboardOf` |
+| `hasPowerSupply` | `PCConfiguration` | `PowerSupply` | `isPowerSupplyOf` |
+| `hasComponent` | `PCConfiguration` | `Component` | `isComponentOf` |
+| `isSocketOf` | `Socket` | `CPU or Motherboard` | `hasSocket` |
+| `isCPUOf` | `CPU` | `PCConfiguration` | `hasCPU` |
+| `isMotherboardOf` | `Motherboard` | `PCConfiguration` | `hasMotherboard` |
+| `isPowerSupplyOf` | `PowerSupply` | `PCConfiguration` | `hasPowerSupply` |
+| `isComponentOf` | `Component` | `PCConfiguration` | `hasComponent` |
 
-| № | Вимога | Реалізація та перевірка |
-|---|---|---|
-| 1 | Створити нову OWL-онтологію в Protégé 5.5+ | Новий OWL-файл створено програмно та відкрито у Protégé 5.6.9. Відкриття підтверджене Computer Use і журналом програми. Ручне створення елементів через GUI не виконувалося. |
-| 2 | Створити класи | Оголошено `Component`, `CPU`, `Motherboard`, `PowerSupply`, `Socket`, `PCConfiguration`. Перевірено OWLAPI: рівно 6. |
-| 3 | Побудувати ієрархію | `CPU`, `Motherboard`, `PowerSupply` є підкласами `Component`. `Socket` і `PCConfiguration` — окремі класи верхнього рівня. HermiT підтвердив ієрархію. |
-| 4 | Створити Object Properties | Оголошено `hasSocket`, `hasCPU`, `hasMotherboard`, `hasPowerSupply`. |
-| 5 | Визначити Domain та Range | Для всіх 4 властивостей задано Domain/Range. Для `hasSocket` Domain — об’єднання `CPU or Motherboard`. |
-| 6 | Створити Data Properties | Оголошено `hasTDP`, `hasWattage`, `hasPrice`. |
-| 7 | Визначити типи значень | `hasTDP` і `hasWattage`: `xsd:integer`; `hasPrice`: `xsd:decimal`. Літерали записані з явними типами. |
-| 8 | Створити не менше 12 Individuals в усіх класах | Створено 18 різних індивідів. Усі класи мають екземпляри з урахуванням успадкування; для `Component` HermiT вивів 11. |
-| 9 | Встановити зв’язки Individuals | 8 зв’язків `hasSocket` + по 4 зв’язки `hasCPU`, `hasMotherboard`, `hasPowerSupply` = 20. |
-| 10 | Задати Data Properties | 4 значення TDP + 3 значення Wattage + 11 цін = 18. Повноту явних даних перевірено окремо. |
-| 11 | Перевірити структуру через OntoGraf | Користувач розкрив граф та надав його зображення. Переглянуто всі 6 класів і 18 індивідів; зображення збережено як `screenshots/01_ontograf_full.png`. Відповідність конкретних зв’язків додатково підтверджена перевіркою OWL, оскільки на загальному графі підписи ребер не відображені. |
-| 12 | Зберегти онтологію у форматі OWL | Збережено `PC_Builder.owl` у RDF/XML. Файл повторно прочитаний OWLAPI й перевірений HermiT. Збереження через меню Protégé не підтверджене. |
+`hasCPU`, `hasMotherboard`, `hasPowerSupply` — підвластивості `hasComponent`. Тому три компоненти кожної конфігурації виводяться з наявних спеціалізованих зв’язків.
 
-## Класи та ієрархія
+Перші чотири прямі властивості — **Functional**; їхні обернені — **InverseFunctional**. Обернені не оголошено Functional: наприклад, `PSU_650W isPowerSupplyOf` має два значення. `hasComponent` і `isComponentOf` не функціональні й не обернено-функціональні.
+
+Усі 10 Object Properties — **Asymmetric** та **Irreflexive**: об’єкт не пов’язується цією самою властивістю із собою, а пара `x R y` не може співіснувати з `y R x`. Їхні Domain і Range також несумісні. Симетричність, транзитивність і рефлексивність для цих відношень предметно не підходять.
+
+У OWL записано лише 20 вихідних прямих зв’язків. HermiT отримав 20 обернених, 12 `hasComponent` і 12 `isComponentOf`: разом **64**. Наприклад:
+
+```text
+Явно:    PC_Office_AM4 hasCPU CPU_AM4_65W
+Виведено: CPU_AM4_65W isCPUOf PC_Office_AM4
+Виведено: PC_Office_AM4 hasComponent CPU_AM4_65W
+Виведено: CPU_AM4_65W isComponentOf PC_Office_AM4
+```
+
+Один Domain `CPU or Motherboard` означає об’єднання. Два окремі Domain означали б перетин, що конфліктує з несумісністю цих класів. Domain/Range використовуються для логічних висновків про типи, а не як звичайна перевірка полів форми. [W3C: Domain and Range](https://www.w3.org/TR/owl2-primer/#Domain_and_Range_Restrictions).
+
+## Data Properties та власні типи даних
+
+| Властивість | Domain | Range | Умова |
+|---|---|---|---|
+| `hasTDP` | `CPU` | `PositiveWattage` | `xsd:integer[>= 1]`, Вт |
+| `hasWattage` | `PowerSupply` | `PositiveWattage` | `xsd:integer[>= 1]`, Вт |
+| `hasPrice` | `Component` | `NonNegativePrice` | `xsd:decimal[>= 0]`, умовні одиниці |
+| `hasPurpose` | `PCConfiguration` | `ConfigurationPurpose` | `{"office", "general", "performance"}`, рядки |
+
+Усі чотири властивості — **Functional**. Для Data Properties OWL 2 не надає аналога `inverseOf` або характеристики InverseFunctional. Використано `DatatypeDefinition`, `DatatypeRestriction` та `DataOneOf`. [W3C: Data Property Axioms](https://www.w3.org/TR/owl2-syntax/#Data_Property_Axioms), [W3C: Data Ranges](https://www.w3.org/TR/owl2-syntax/#Data_Ranges).
+
+Додані факти: `PC_Office_AM4 → office`, `PC_Performance_AM4 → performance`, `PC_Modern_AM5 → general`, `PC_Intel_LGA1700 → performance`. Числові значення другої практичної залишилися без змін.
+
+## Несумісність, кількість та існування
+
+Попарно несумісні групи:
+
+- `Component`, `Socket`, `PCConfiguration`.
+- `CPU`, `Motherboard`, `PowerSupply`.
+
+Усі 18 індивідів залишаються в `AllDifferent`. Це явно забороняє злиття різних імен у той самий об’єкт для задоволення обмежень кількості.
+
+Обмеження в Manchester-подібному записі:
+
+```text
+Component SubClassOf:
+  hasPrice exactly 1 xsd:decimal
+
+CPU SubClassOf:
+  Component,
+  hasSocket exactly 1 Socket,
+  hasSocket some Socket,
+  hasSocket only Socket,
+  hasTDP exactly 1 xsd:integer
+
+Motherboard SubClassOf:
+  Component,
+  hasSocket exactly 1 Socket,
+  hasSocket some Socket,
+  hasSocket only Socket
+
+PowerSupply SubClassOf:
+  Component,
+  hasWattage exactly 1 xsd:integer
+
+PCConfiguration SubClassOf:
+  hasCPU exactly 1 CPU,
+  hasMotherboard exactly 1 Motherboard,
+  hasPowerSupply exactly 1 PowerSupply,
+  hasComponent some CPU,
+  hasComponent some Motherboard,
+  hasComponent some PowerSupply,
+  hasComponent only (CPU or Motherboard or PowerSupply),
+  hasComponent min 3 Component,
+  hasComponent max 3 Component,
+  hasPurpose exactly 1 ConfigurationPurpose
+```
+
+Старі числові `exactly 1` залишено; нові Range звужують допустимі значення до додатних потужностей і невід’ємних цін. `min 3` разом із `max 3` задає рівно три компоненти. Окремі `some` та `only` для сокетів частково повторюють наслідки `exactly 1` і Range, але явно демонструють обидва види обмежень із завдання.
+
+Закрито лише навчальний довідник сокетів:
+
+```text
+Socket EquivalentTo: {Socket_AM4, Socket_AM5, Socket_LGA1700}
+```
+
+Новий індивід класу Socket мусив би збігтися з одним із цих трьох. Якщо явно вимагати його відмінності від усіх трьох, виникає суперечність. Решта класів не закривається наявними прикладами: каталог може поповнюватися новими CPU, платами, БП і конфігураціями.
+
+## Defined Classes
+
+Усі наведені умови записані через `EquivalentClasses`, тому задають необхідні й достатні умови. Вихідні індивіди не отримали жодного ручного твердження про належність до цих 14 класів.
+
+| Defined Class | Еквівалентний вираз |
+|---|---|
+| `AM4CPU` | `CPU and (hasSocket value Socket_AM4)` |
+| `AM5CPU` | `CPU and (hasSocket value Socket_AM5)` |
+| `LGA1700CPU` | `CPU and (hasSocket value Socket_LGA1700)` |
+| `AM4Motherboard` | `Motherboard and (hasSocket value Socket_AM4)` |
+| `AM5Motherboard` | `Motherboard and (hasSocket value Socket_AM5)` |
+| `LGA1700Motherboard` | `Motherboard and (hasSocket value Socket_LGA1700)` |
+| `AM4Configuration` | `PCConfiguration and (hasCPU some AM4CPU) and (hasMotherboard some AM4Motherboard)` |
+| `AM5Configuration` | `PCConfiguration and (hasCPU some AM5CPU) and (hasMotherboard some AM5Motherboard)` |
+| `LGA1700Configuration` | `PCConfiguration and (hasCPU some LGA1700CPU) and (hasMotherboard some LGA1700Motherboard)` |
+| `SocketCompatibleConfiguration` | `AM4Configuration or AM5Configuration or LGA1700Configuration` |
+| `EfficientCPU` | `CPU and (hasTDP some xsd:integer[<= 65])` |
+| `HighPowerSupply` | `PowerSupply and (hasWattage some xsd:integer[>= 650])` |
+| `EfficientConfiguration` | `PCConfiguration and (hasCPU some EfficientCPU)` |
+| `OfficeConfiguration` | `PCConfiguration and (hasPurpose value "office")` |
+
+Наприклад, `hasSocket value Socket_AM4` — застосування зразка `hasState value EmergencyState` до PC Builder. Еквівалентна форма: `hasSocket some {Socket_AM4}`.
+
+`SocketCompatibleConfiguration` означає лише збіг типу сокета CPU та плати в цьому закритому довіднику. Довільну конфігурацію не оголошено підкласом сумісних. При заміні AM4-плати на AM5-плату модель може залишатися узгодженою, але HermiT доводить, що така конфігурація не належить до сумісних. Це перевірено окремим контрольним прикладом.
+
+## Отримана inferred class hierarchy
+
+Нижче — ієрархія, отримана від HermiT; `owl:Nothing` не показано, оскільки невиконуваних іменованих класів немає.
 
 ```text
 owl:Thing
 ├── Component
 │   ├── CPU
+│   │   ├── AM4CPU
+│   │   ├── AM5CPU
+│   │   ├── LGA1700CPU
+│   │   └── EfficientCPU
 │   ├── Motherboard
+│   │   ├── AM4Motherboard
+│   │   ├── AM5Motherboard
+│   │   └── LGA1700Motherboard
 │   └── PowerSupply
-├── Socket
-└── PCConfiguration
+│       └── HighPowerSupply
+├── PCConfiguration
+│   ├── SocketCompatibleConfiguration
+│   │   ├── AM4Configuration
+│   │   ├── AM5Configuration
+│   │   └── LGA1700Configuration
+│   ├── EfficientConfiguration
+│   └── OfficeConfiguration
+└── Socket
 ```
 
-| Клас | Значення | Прямих екземплярів | Екземплярів з успадкуванням |
-|---|---|---:|---:|
-| Component | Узагальнена комплектуюча | 0 | 11 |
-| CPU | Процесор | 4 | 4 |
-| Motherboard | Материнська плата | 4 | 4 |
-| PowerSupply | Блок живлення | 3 | 3 |
-| Socket | Тип сокета | 3 | 3 |
-| PCConfiguration | Набір із CPU, плати та БП | 4 | 4 |
+Нові зв’язки підкласів не прописано окремими `SubClassOf` для визначених класів: reasoner вивів їх з еквівалентних виразів. Зокрема, три платформні конфігурації розташувалися під `SocketCompatibleConfiguration`, а той — під `PCConfiguration`.
 
-18 — це кількість **унікальних** індивідів; 11 екземплярів `Component` не додаються повторно. Нуль прямих екземплярів у загального класу не означає, що клас порожній.
+`EfficientCPU` перетинається з класами сокетів: економічність і тип сокета — незалежні ознаки. `CPU_AM4_65W` належить одночасно до `AM4CPU` та `EfficientCPU`. Аналогічно `PC_Office_AM4` належить до `AM4Configuration`, `EfficientConfiguration` та `OfficeConfiguration`.
 
-## Object Properties
+`OfficeConfiguration` не виведено підкласом `EfficientConfiguration`: одного економічного прикладу недостатньо для такого загального правила. HermiT також вивів несумісність `AM4CPU` з `AM5CPU` та відповідних класів конфігурацій: одна функціональна властивість сокета не може одночасно мати два різні значення.
 
-| Властивість | Domain | Range | Приклад |
-|---|---|---|---|
-| hasSocket | `CPU or Motherboard` | `Socket` | `CPU_AM4_65W → Socket_AM4` |
-| hasCPU | `PCConfiguration` | `CPU` | `PC_Office_AM4 → CPU_AM4_65W` |
-| hasMotherboard | `PCConfiguration` | `Motherboard` | `PC_Office_AM4 → Motherboard_AM4_A` |
-| hasPowerSupply | `PCConfiguration` | `PowerSupply` | `PC_Office_AM4 → PSU_450W` |
+## Виведені екземпляри
 
-Усі чотири властивості функціональні: одному суб’єкту відповідає не більше одного значення цієї властивості. Це **не** inverse functional: кілька процесорів можуть посилатися на один тип сокета, а навчальні конфігурації можуть використовувати один запис БП.
+| Клас | Individuals, отримані від HermiT |
+|---|---|
+| `AM4CPU` | `CPU_AM4_65W`, `CPU_AM4_105W` |
+| `AM5CPU` | `CPU_AM5_65W` |
+| `LGA1700CPU` | `CPU_LGA1700_125W` |
+| `AM4Motherboard` | `Motherboard_AM4_A`, `Motherboard_AM4_B` |
+| `AM5Motherboard` | `Motherboard_AM5` |
+| `LGA1700Motherboard` | `Motherboard_LGA1700` |
+| `AM4Configuration` | `PC_Office_AM4`, `PC_Performance_AM4` |
+| `AM5Configuration` | `PC_Modern_AM5` |
+| `LGA1700Configuration` | `PC_Intel_LGA1700` |
+| `SocketCompatibleConfiguration` | Усі 4 вихідні конфігурації |
+| `EfficientCPU` | `CPU_AM4_65W`, `CPU_AM5_65W` |
+| `HighPowerSupply` | `PSU_650W`, `PSU_750W` |
+| `EfficientConfiguration` | `PC_Office_AM4`, `PC_Modern_AM5` |
+| `OfficeConfiguration` | `PC_Office_AM4` |
 
-`hasSocket` має **одну** аксіому Domain з `owl:unionOf`. Дві окремі аксіоми Domain (`CPU` та `Motherboard`) означали б належність до обох класів одночасно. Оскільки класи несумісні, такий запис спричинив би суперечність для наявних об’єктів. Семантика Domain/Range та об’єднання класів описані у [W3C OWL 2 Primer](https://www.w3.org/TR/owl2-primer/).
+## Перевірка обмежень
 
-## Data Properties
+HermiT підтвердив узгодженість, виконуваність усіх 20 класів, очікувані екземпляри, обернені зв’язки й рівно три виведені компоненти кожної конфігурації. Додатковий код перевірив наявність усіх необхідних явних значень, а також навчальну умову `Wattage ≥ CPU TDP` і суми цін.
 
-| Властивість | Domain | Range | Одиниці | Приклад літерала |
-|---|---|---|---|---|
-| hasTDP | CPU | xsd:integer | Вт | `65` типу `xsd:integer` |
-| hasWattage | PowerSupply | xsd:integer | Вт | `450` типу `xsd:integer` |
-| hasPrice | Component | xsd:decimal | умовні грошові одиниці | `120.00` типу `xsd:decimal` |
+Виконано **16 негативних контролів** на окремих копіях лише в пам’яті. Кожен спричинив очікувану неузгодженість:
 
-Усі Data Properties функціональні. Domain `Component` поширює ціну на процесори, плати й блоки живлення. Для сокетів і конфігурацій ціну не задано: сокет є типом інтерфейсу, а підсумок конфігурації обчислюється окремо.
+| № | Навмисна зміна |
+|---|---|
+| 1 | CPU одночасно оголошено Motherboard |
+| 2 | CPU має два різні сокети |
+| 3 | Union-domain hasSocket замінено двома окремими Domain |
+| 4 | Текст замість числового TDP |
+| 5 | Нульовий TDP |
+| 6 | Від’ємна потужність БП |
+| 7 | Від’ємна ціна |
+| 8 | Призначення `gaming`, відсутнє в enumeration |
+| 9 | Два різні значення функціонального hasPurpose |
+| 10 | Четвертий відмінний компонент при max 3 |
+| 11 | Компонент, який явно не є CPU, Motherboard або PowerSupply; для ізоляції only тимчасово вилучено max 3 |
+| 12 | Четвертий сокет, явно відмінний від усіх трьох дозволених |
+| 13 | Socket як значення hasComponent |
+| 14 | Самопосилання через hasCPU |
+| 15 | Другий відмінний CPU при exactly 1 |
+| 16 | Явне max 0 для hasCPU за наявної вимоги існування; пряме твердження CPU тимчасово вилучено |
 
-## Individuals та значення
+Два додаткові контрольні приклади залишаються узгодженими: вилучення явного зв’язку CPU та заміна плати на іншу платформу. У першому випадку HermiT усе одно доводить існування CPU; у другому — доводить неналежність до `SocketCompatibleConfiguration`.
 
-### Процесори — 4
+OWL використовує припущення відкритого світу: невідоме значення не дорівнює забороненому або відсутньому. Тому `exactly 1` не гарантує наявності явного запису у файлі; повноту даних перевірено окремо. [W3C: What is OWL 2?](https://www.w3.org/TR/owl2-primer/#What_is_OWL_2.3F).
 
-| Individual | hasSocket | hasTDP, Вт | hasPrice |
-|---|---|---:|---:|
-| CPU_AM4_65W | Socket_AM4 | 65 | 120.00 |
-| CPU_AM4_105W | Socket_AM4 | 105 | 220.00 |
-| CPU_AM5_65W | Socket_AM5 | 65 | 250.00 |
-| CPU_LGA1700_125W | Socket_LGA1700 | 125 | 300.00 |
+Порівняння чисел у різних індивідів (`Wattage ≥ TDP`) та сумування цін виконуються процедурно. Вони не подаються як висновки HermiT чи повна інженерна перевірка ПК.
 
-### Материнські плати — 4
+## Повторення перевірки
 
-| Individual | hasSocket | hasPrice |
-|---|---|---:|
-| Motherboard_AM4_A | Socket_AM4 | 90.00 |
-| Motherboard_AM4_B | Socket_AM4 | 140.00 |
-| Motherboard_AM5 | Socket_AM5 | 180.00 |
-| Motherboard_LGA1700 | Socket_LGA1700 | 160.00 |
+У корені проєкту, PowerShell, JDK 11+:
 
-### Блоки живлення — 3
-
-| Individual | hasWattage, Вт | hasPrice |
-|---|---:|---:|
-| PSU_450W | 450 | 50.00 |
-| PSU_650W | 650 | 80.00 |
-| PSU_750W | 750 | 100.00 |
-
-### Сокети — 3
-
-`Socket_AM4`, `Socket_AM5`, `Socket_LGA1700` належать до `Socket`. Для них у вихідній моделі не передбачено числових атрибутів. Процесори й плати посилаються на ті самі індивіди сокетів, що дозволяє порівняти їхні ідентифікатори.
-
-### Конфігурації — 4
-
-| Individual | hasCPU | hasMotherboard | hasPowerSupply |
-|---|---|---|---|
-| PC_Office_AM4 | CPU_AM4_65W | Motherboard_AM4_A | PSU_450W |
-| PC_Performance_AM4 | CPU_AM4_105W | Motherboard_AM4_B | PSU_650W |
-| PC_Modern_AM5 | CPU_AM5_65W | Motherboard_AM5 | PSU_650W |
-| PC_Intel_LGA1700 | CPU_LGA1700_125W | Motherboard_LGA1700 | PSU_750W |
-
-Приклад конкретного фрагмента моделі:
-
-```text
-PC_Office_AM4
-  hasCPU         → CPU_AM4_65W
-                    hasSocket → Socket_AM4
-                    hasTDP    → 65 (integer)
-                    hasPrice  → 120.00 (decimal)
-  hasMotherboard → Motherboard_AM4_A
-                    hasSocket → Socket_AM4
-                    hasPrice  → 90.00 (decimal)
-  hasPowerSupply → PSU_450W
-                    hasWattage → 450 (integer)
-                    hasPrice   → 50.00 (decimal)
+```powershell
+.\validation\run-validation.ps1
 ```
 
-## Додаткові логічні аксіоми
+За потреби шлях до JDK можна передати явно:
 
-Вони уточнюють навчальну модель, не додаючи нових іменованих класів або властивостей.
+```powershell
+.\validation\run-validation.ps1 -JavaHome 'C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot'
+```
 
-- `CPU`, `Motherboard`, `PowerSupply` попарно несумісні.
-- `Component`, `Socket`, `PCConfiguration` попарно несумісні.
-- Усі 18 Individuals включено до `owl:AllDifferent`.
-- `CPU` та `Motherboard`: `hasSocket exactly 1 Socket`.
-- `PCConfiguration`: `hasCPU exactly 1 CPU`, `hasMotherboard exactly 1 Motherboard`, `hasPowerSupply exactly 1 PowerSupply`.
-- `Component`: `hasPrice exactly 1 xsd:decimal`.
-- `CPU`: `hasTDP exactly 1 xsd:integer`.
-- `PowerSupply`: `hasWattage exactly 1 xsd:integer`.
+Бібліотеки вже є в `validation/lib`; мережа й запущений Protégé не потрібні. Перевірка компілює актуальні вихідні файли, оновлює журнал, результати виведення й контрольну суму. Фінальний OWL не редагується.
 
-За припущенням відкритого світу відсутність явного значення не обов’язково робить OWL-онтологію суперечливою: потрібне значення може бути невідомим. Тому окремо перевірено, що всі необхідні зв’язки й числа фактично записані у файлі. Це відрізняється від логічної перевірки reasoner. Див. [W3C OWL 2 Primer: базові припущення](https://www.w3.org/TR/owl2-primer/#What_is_OWL_2.3F).
+Відтворення OWL, якщо встановлено Node.js:
 
-## Перевірка reasoner і контроль помилок
+```powershell
+node .\build_ontology.mjs
+```
 
-Використано встановлені бібліотеки, без завантаження нового reasoner:
+Генератор читає збережену вихідну онтологію `validation/practice2/PC_Builder.owl`, додає аксіоми та записує кореневий `PC_Builder.owl`. Повторний запуск дає той самий файл.
 
-- OWLAPI: `4.5.29`.
-- Файл плагіна: `org.semanticweb.hermit-1.4.3.456.jar`.
-- Версія, яку повертає сам reasoner: `HermiT 1.4.1.432`.
-- Останній успішний запуск після видалення коментарів: 12.09.2026, 11:24 за місцевим часом UTC+03:00.
+Для перегляду у Protégé: відкрити кореневий `PC_Builder.owl`, вибрати `Reasoner → HermiT → Start reasoner`, перейти до `Classes` та виведеної ієрархії; перевірити `Equivalent To` для `AM4CPU` і `SocketCompatibleConfiguration`, а також виведені екземпляри та обернені зв’язки. Якщо завантажена стара версія, спочатку виконати `File → Reload`.
 
-| Перевірка | Результат |
-|---|---|
-| Синтаксичне завантаження RDF/XML | Успішно |
-| Відповідність OWL 2 DL | 0 порушень |
-| Узгодженість онтології | `true` |
-| Невиконувані іменовані класи, крім owl:Nothing | 0 |
-| Класифікація підкласів Component | Коректна |
-| Наповненість усіх 6 класів | Підтверджена |
-| Виведені екземпляри Component | 11 |
-| Помилкове виведення CPU як Motherboard | Відсутнє |
-| Повнота явних зв’язків та числових значень | Підтверджена |
-| Значення TDP/Wattage додатні, ціни невід’ємні | Підтверджено окремою перевіркою даних |
+Нова версія в GUI автоматично не перевірялася. Зображення в `screenshots` належать практичній № 2; доказом поточного запуску HermiT є новий журнал, а не старі знімки.
 
-Для перевірки здатності reasoner виявляти помилки створено чотири тимчасові копії **лише в пам’яті**:
+## Збереження другої практичної
 
-| Навмисна помилка | Результат HermiT |
-|---|---|
-| Один CPU додатково оголошено Motherboard | Виявлено неузгодженість |
-| Процесору задано два різні сокети | Виявлено неузгодженість |
-| Union-domain замінено на два окремі Domain | Виявлено неузгодженість |
-| Для hasTDP додано текстове значення | Виявлено неузгодженість |
+До початку змін створено локальний Git-репозиторій. Початковий коміт **`542a07a` — «Практика 2: початкова онтологія PC Builder»**, позначений тегом **`practice-2`**, містить усі 60 початкових файлів. Зовнішній Git remote не налаштовано.
 
-У фінальній моделі логічних помилок не знайдено, тож виправляти її після перевірки не знадобилося. Помилку з Domain було попереджено під час моделювання, а її наслідок перевірено контрольним тестом. Тестові помилки не зберігалися в `PC_Builder.owl`.
-
-Журнал є результатом реального запуску HermiT, проте **не доказом натискання Start reasoner у Protégé**. Для повторення локальної перевірки збережено [сценарій перевірки](validation/run-validation.ps1) та контрольну суму [SHA-256](validation/owl-sha256.txt).
-
-## Перевірка прикладної задачі
-
-Для кожної конфігурації окремо прочитано її CPU, Motherboard і PowerSupply; порівняно посилання `hasSocket`; порівняно Wattage і TDP; підсумовано три ціни.
-
-| Конфігурація | Спільний сокет | TDP, Вт | Wattage, Вт | Сума цін | Результат двох навчальних перевірок |
-|---|---|---:|---:|---:|---|
-| PC_Office_AM4 | AM4 | 65 | 450 | 260.00 | Пройдено |
-| PC_Performance_AM4 | AM4 | 105 | 650 | 440.00 | Пройдено |
-| PC_Modern_AM5 | AM5 | 65 | 650 | 510.00 | Пройдено |
-| PC_Intel_LGA1700 | LGA1700 | 125 | 750 | 560.00 | Пройдено |
-
-Ці результати отримані **процедурною перевіркою даних**, а не автоматичним логічним висновком HermiT про сумісність ПК. У файлі немає правила, яке прирівнює сокети CPU та плати конфігурації, або правила порівняння чисел у різних індивідів. Зміна плати на плату з іншим сокетом може залишити онтологію логічно узгодженою, але окрема перевірка даних виявить невідповідність.
-
-Модель охоплює заданий перелік елементів практичної № 2. Вона не є повним інженерним валідатором реального ПК: модель не містить усіх споживачів живлення, роз’ємів, прошивок чи інших параметрів. Перевірка `Wattage ≥ TDP CPU` має лише навчальний зміст у межах наданого спрощення. У заданих Data Properties немає ліміту бюджету; обчислена сума цін не означає перевірку дотримання бюджету.
-
-## Перевірка у Protégé та довідкові кроки
-
-OntoGraf, ієрархія класів, списки властивостей і приклад числових значень уже показані на наданих користувачем кадрах. Окремо залишається підтвердити запуск HermiT у GUI (крок 6). Решта кроків нижче збережена як довідка для повторного перегляду моделі; це не твердження, що всі ці дії виконані автоматично.
-
-1. Перейти у вже відкрите вікно `pc-builder` та вибрати `File → Reload`, щоб прочитати очищений OWL з диска. Якщо вікно закрито, через `File → Open…` повторно відкрити `PC_Builder.owl`. Перевірити активний IRI `https://example.org/pc-builder`; у заголовку також може відображатися version IRI `https://example.org/pc-builder/1.0`.
-2. На вкладці `Entities` розгорнути `Component`; перевірити його три підкласи.
-3. В `Object properties` вибрати `hasSocket`; перевірити один Domain `CPU or Motherboard`, Range `Socket`, ознаку Functional. Аналогічно переглянути три властивості конфігурації.
-4. В `Data properties` переглянути `hasTDP`, `hasWattage`, `hasPrice` та їхні типи.
-5. В `Individuals`/`Individuals by class` переглянути, наприклад, `PC_Office_AM4`, `CPU_AM4_65W` та `PSU_450W`.
-6. Вибрати `Reasoner → HermiT`, запустити `Start reasoner` і дочекатися завершення. Перевірити виведену ієрархію та відсутність іменованих класів під `owl:Nothing`. Поточну логіку відображення результатів описує [офіційна інструкція Protégé](https://protegewiki.stanford.edu/wiki/Protege4GettingStarted).
-7. Увімкнути `Window → Tabs → OntoGraf` і перейти на цю вкладку. У дереві зліва вибрати `Component`; на вузлі графа натиснути праву кнопку миші та `Expand`. Вибрати також `Socket` і `PCConfiguration`, щоб додати їх до графа. Для конкретної конфігурації в полі `Search` знайти `PC_Office_AM4`, натиснути `Search`, потім на її вузлі вибрати `Show neighborhood` або `Expand`. Розгорнути вузли CPU і Motherboard: обидва мають бути пов’язані з `Socket_AM4`. Команди підтверджені [кодом OntoGraf](https://raw.githubusercontent.com/protegeproject/ontograf/master/src/main/java/org/protege/ontograf/common/GraphController.java). Перевірити напрямки зв’язків і три рівні «конфігурація → комплектуюча → сокет». Відфільтрувати зайві вузли та підібрати читабельне компонування. Для збереження графа використати кнопку `Export Graph as Image` та формат PNG. OntoGraf підтримує перегляд ієрархії, індивідів, зв’язків та експорт зображень: [опис плагіна](https://protegewiki.stanford.edu/wiki/OntoGraf).
-8. Якщо модель змінювалася в редакторі, зберегти її через `File → Save`. Після зміни логічних аксіом або даних повторити перевірку reasoner.
-
-## Скриншоти для звіту
-
-Збережено чотири зображення, надані користувачем. Їхні файли скопійовані без редагування; оригінали й копії мають однакові контрольні суми.
-
-| Збережений файл | Що видно |
-|---|---|
-| [01_ontograf_full.png](screenshots/01_ontograf_full.png) | Загальний граф: 6 класів предметної області, owl:Thing, 18 індивідів та ребра. Підписи ребер не показані. |
-| [02_object_properties.png](screenshots/02_object_properties.png) | Список hasCPU, hasMotherboard, hasPowerSupply, hasSocket. Панелі Domain/Range не потрапили в кадр. |
-| [03_data_properties.png](screenshots/03_data_properties.png) | Список hasPrice, hasTDP, hasWattage. Типи значень у цьому фрагменті не показані. |
-| [04_individual_values.png](screenshots/04_individual_values.png) | Ієрархія класів, 4 екземпляри CPU, опис PSU_650W та його значення hasPrice = 80.00, hasWattage = 650. |
-
-Для підтвердження запуску HermiT у GUI бракує кадру з результатом reasoner. Для докладнішого ілюстрування звіту можна додати панелі Domain/Range та значення TDP одного процесора; самі ці дані вже містяться у перевіреному OWL-файлі.
-
-## Висновок
-
-Концептуальну модель PC Builder перенесено у самодостатню OWL 2 DL-модель з ієрархією, типізованими властивостями, 18 індивідами та конкретними даними; готовий файл відкрито у Protégé 5.6.9. HermiT, запущений поза GUI, підтвердив логічну узгодженість; окрема перевірка підтвердила повноту даних і два спрощені критерії для чотирьох конфігурацій. Граф OntoGraf переглянуто за наданим користувачем зображенням, чотири кадри збережено для звіту. Непідтвердженим залишається запуск HermiT саме у графічному інтерфейсі Protégé.
+[Звіт другої практичної](REPORT_PRACTICE2.md), [початковий OWL](validation/practice2/PC_Builder.owl) та [початковий журнал](validation/practice2/reasoner-output.txt) збережено окремо. Архів `PC_Builder_Practice2.zip` залишено без змін.

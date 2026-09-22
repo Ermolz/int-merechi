@@ -1,32 +1,37 @@
-param([string]$ProtegeDirectory = 'C:\Users\Ermolz\Desktop\Protege-5.6.9')
+param([string]$JavaHome = $env:JAVA_HOME)
 $ErrorActionPreference = 'Stop'
 $validationDirectory = $PSScriptRoot
 $workspaceDirectory = Split-Path -Parent $validationDirectory
 $libraryDirectory = Join-Path $validationDirectory 'lib'
-New-Item -ItemType Directory -Path $libraryDirectory -Force | Out-Null
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-$bundleNames = @('owlapi-osgidistribution.jar','guava.jar','org.apache.servicemix.bundles.javax-inject.jar','slf4j-api.jar','logback-classic.jar','logback-core.jar')
-foreach ($bundleName in $bundleNames) {
-    Copy-Item -LiteralPath (Join-Path $ProtegeDirectory "bundles\$bundleName") -Destination (Join-Path $libraryDirectory $bundleName) -Force
+$buildDirectory = Join-Path $validationDirectory 'build'
+
+if (-not $JavaHome) {
+    $javaCommand = Get-Command javac.exe -ErrorAction SilentlyContinue
+    if ($javaCommand) { $JavaHome = Split-Path -Parent (Split-Path -Parent $javaCommand.Source) }
 }
-$hermitName = 'org.semanticweb.hermit-1.4.3.456.jar'
-Copy-Item -LiteralPath (Join-Path $ProtegeDirectory "plugins\$hermitName") -Destination (Join-Path $libraryDirectory $hermitName) -Force
-foreach ($containerName in @('owlapi-osgidistribution.jar',$hermitName)) {
-    $archive = [IO.Compression.ZipFile]::OpenRead((Join-Path $libraryDirectory $containerName))
-    try {
-        foreach ($entry in $archive.Entries) {
-            if ($entry.FullName.EndsWith('.jar')) {
-                $destinationPath = Join-Path $libraryDirectory ([IO.Path]::GetFileName($entry.FullName))
-                [IO.Compression.ZipFileExtensions]::ExtractToFile($entry,$destinationPath,$true)
-            }
-        }
-    } finally { $archive.Dispose() }
+if (-not $JavaHome) {
+    $candidate = Get-ChildItem -LiteralPath 'C:\Program Files\Eclipse Adoptium' -Directory -ErrorAction SilentlyContinue |
+        Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'bin\javac.exe') } |
+        Sort-Object Name | Select-Object -First 1
+    if ($candidate) { $JavaHome = $candidate.FullName }
 }
-$javaClassPath = "$libraryDirectory\*;$validationDirectory"
-& javac -proc:none -encoding UTF-8 -cp $javaClassPath -d $validationDirectory (Join-Path $validationDirectory 'VerifyOntology.java')
+if (-not $JavaHome) { throw 'JDK 11+ is required. Pass -JavaHome or set JAVA_HOME.' }
+$java = Join-Path $JavaHome 'bin\java.exe'
+$javac = Join-Path $JavaHome 'bin\javac.exe'
+if (-not (Test-Path -LiteralPath $javac)) { throw "JDK compiler not found: $javac" }
+if (-not (Test-Path -LiteralPath (Join-Path $libraryDirectory 'org.semanticweb.hermit-1.4.3.456.jar'))) { throw 'Bundled HermiT libraries are missing.' }
+
+New-Item -ItemType Directory -Path $buildDirectory -Force | Out-Null
+$javaClassPath = "$libraryDirectory\*;$buildDirectory"
+$sources = @((Join-Path $validationDirectory 'VerifyOntology.java'), (Join-Path $validationDirectory 'VerifyPractice3.java'))
+& $javac -proc:none -encoding UTF-8 -cp $javaClassPath -d $buildDirectory @sources
 if ($LASTEXITCODE -ne 0) { throw "Compilation failed: $LASTEXITCODE" }
+$ontologyPath = Join-Path $workspaceDirectory 'PC_Builder.owl'
+$hashBefore = (Get-FileHash -LiteralPath $ontologyPath -Algorithm SHA256).Hash
 $logConfiguration = Join-Path $validationDirectory 'logback.xml'
-$resultPath = Join-Path $validationDirectory 'reasoner-output.txt'
-& java "-Dlogback.configurationFile=$logConfiguration" -cp $javaClassPath VerifyOntology (Join-Path $workspaceDirectory 'PC_Builder.owl') 2>&1 | Tee-Object -FilePath $resultPath
+& $java "-Dlogback.configurationFile=$logConfiguration" -cp $javaClassPath VerifyOntology $ontologyPath 2>&1 |
+    Tee-Object -FilePath (Join-Path $validationDirectory 'reasoner-output.txt')
 if ($LASTEXITCODE -ne 0) { throw "Validation failed: $LASTEXITCODE" }
-Get-FileHash -LiteralPath (Join-Path $workspaceDirectory 'PC_Builder.owl') -Algorithm SHA256 | Format-List | Out-File -LiteralPath (Join-Path $validationDirectory 'owl-sha256.txt')
+$hashAfter = (Get-FileHash -LiteralPath $ontologyPath -Algorithm SHA256).Hash
+if ($hashBefore -ne $hashAfter) { throw 'Validation unexpectedly changed the ontology.' }
+"$hashAfter  PC_Builder.owl" | Set-Content -LiteralPath (Join-Path $validationDirectory 'owl-sha256.txt') -Encoding utf8

@@ -1,0 +1,20 @@
+AM4CPU: CPU_AM4_105W, CPU_AM4_65W
+AM4Configuration: PC_Office_AM4, PC_Performance_AM4
+AM4Motherboard: Motherboard_AM4_A, Motherboard_AM4_B
+AM5CPU: CPU_AM5_65W
+AM5Configuration: PC_Modern_AM5
+AM5Motherboard: Motherboard_AM5
+CPU: CPU_AM4_105W, CPU_AM4_65W, CPU_AM5_65W, CPU_LGA1700_125W
+Component: CPU_AM4_105W, CPU_AM4_65W, CPU_AM5_65W, CPU_LGA1700_125W, Motherboard_AM4_A, Motherboard_AM4_B, Motherboard_AM5, Motherboard_LGA1700, PSU_450W, PSU_650W, PSU_750W
+EfficientCPU: CPU_AM4_65W, CPU_AM5_65W
+EfficientConfiguration: PC_Modern_AM5, PC_Office_AM4
+HighPowerSupply: PSU_650W, PSU_750W
+LGA1700CPU: CPU_LGA1700_125W
+LGA1700Configuration: PC_Intel_LGA1700
+LGA1700Motherboard: Motherboard_LGA1700
+Motherboard: Motherboard_AM4_A, Motherboard_AM4_B, Motherboard_AM5, Motherboard_LGA1700
+OfficeConfiguration: PC_Office_AM4
+PCConfiguration: PC_Intel_LGA1700, PC_Modern_AM5, PC_Office_AM4, PC_Performance_AM4
+PowerSupply: PSU_450W, PSU_650W, PSU_750W
+Socket: Socket_AM4, Socket_AM5, Socket_LGA1700
+SocketCompatibleConfiguration: PC_Intel_LGA1700, PC_Modern_AM5, PC_Office_AM4, PC_Performance_AM4

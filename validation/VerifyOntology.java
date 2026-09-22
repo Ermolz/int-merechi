@@ -44,12 +44,12 @@ public class VerifyOntology {
     System.out.println("File: "+new File(args[0]).getCanonicalPath());
     System.out.println("OWLAPI: "+OWLManager.class.getPackage().getImplementationVersion());
     System.out.println("Run: "+java.time.OffsetDateTime.now());
-    check(o.getClassesInSignature().size()==6,"6 named domain classes");
-    check(o.getObjectPropertiesInSignature().size()==4,"4 object properties");
-    check(o.getDataPropertiesInSignature().size()==3,"3 data properties");
+    check(o.getClassesInSignature().size()==20,"20 named domain classes");
+    check(o.getObjectPropertiesInSignature().size()==10,"10 object properties");
+    check(o.getDataPropertiesInSignature().size()==4,"4 data properties");
     check(o.getIndividualsInSignature().size()==18,"18 named individuals (minimum 12)");
     check(o.getAxiomCount(AxiomType.OBJECT_PROPERTY_ASSERTION)==20,"20 explicit object-property assertions");
-    check(o.getAxiomCount(AxiomType.DATA_PROPERTY_ASSERTION)==18,"18 explicit data-property assertions");
+    check(o.getAxiomCount(AxiomType.DATA_PROPERTY_ASSERTION)==22,"22 explicit data-property assertions");
     OWLProfileReport profile=new OWL2DLProfile().checkOntology(o);
     check(profile.isInProfile(),"OWL 2 DL profile; violations="+profile.getViolations().size());
     OWLReasoner r=new ReasonerFactory().createReasoner(o);
@@ -82,6 +82,7 @@ public class VerifyOntology {
       check(wattage.compareTo(tdp)>=0,pc.getIRI().getShortForm()+": PSU Wattage >= CPU TDP");
       System.out.println("RESULT "+pc.getIRI().getShortForm()+" | socket="+cpuSocket.getIRI().getShortForm()+" | TDP="+tdp+" W | Wattage="+wattage+" W | total="+price+" fictional units");
     }
+    VerifyPractice3.verify(o,r,manager,new File(args[0]).getParentFile());
     r.dispose();
     System.out.println("\nNEGATIVE CONTROLS: temporary in-memory copies; final OWL is never modified.");
     negativeTest("CPU asserted as disjoint Motherboard",Set.of(df.getOWLClassAssertionAxiom(cls("Motherboard"),ind("CPU_AM4_65W"))),Set.of());

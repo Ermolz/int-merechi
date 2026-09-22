@@ -1,79 +1,107 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(?=[A-Za-z]:)/, ''));
-const out = decodeURIComponent(root);
-const base = 'https://example.org/pc-builder';
-const classes = ['Component','CPU','Motherboard','PowerSupply','Socket','PCConfiguration'];
-const cpus = [
-  ['CPU_AM4_65W', 'Socket_AM4', 65, '120.00'],
-  ['CPU_AM4_105W', 'Socket_AM4', 105, '220.00'],
-  ['CPU_AM5_65W', 'Socket_AM5', 65, '250.00'],
-  ['CPU_LGA1700_125W', 'Socket_LGA1700', 125, '300.00']
-];
-const boards = [
-  ['Motherboard_AM4_A', 'Socket_AM4', '90.00'],
-  ['Motherboard_AM4_B', 'Socket_AM4', '140.00'],
-  ['Motherboard_AM5', 'Socket_AM5', '180.00'],
-  ['Motherboard_LGA1700', 'Socket_LGA1700', '160.00']
-];
-const psus = [['PSU_450W',450,'50.00'],['PSU_650W',650,'80.00'],['PSU_750W',750,'100.00']];
-const sockets = ['Socket_AM4','Socket_AM5','Socket_LGA1700'];
-const configs = [
-  ['PC_Office_AM4', cpus[0][0], boards[0][0], psus[0][0]],
-  ['PC_Performance_AM4', cpus[1][0], boards[1][0], psus[1][0]],
-  ['PC_Modern_AM5', cpus[2][0], boards[2][0], psus[1][0]],
-  ['PC_Intel_LGA1700', cpus[3][0], boards[3][0], psus[2][0]]
-];
-const exactObject = (p,c) => `<rdfs:subClassOf><owl:Restriction><owl:onProperty rdf:resource="#${p}"/><owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality><owl:onClass rdf:resource="#${c}"/></owl:Restriction></rdfs:subClassOf>`;
-const exactData = (p,t) => `<rdfs:subClassOf><owl:Restriction><owl:onProperty rdf:resource="#${p}"/><owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality><owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#${t}"/></owl:Restriction></rdfs:subClassOf>`;
-let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns="${base}#" xml:base="${base}"
- xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
- xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
- xmlns:owl="http://www.w3.org/2002/07/owl#"
- xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-  <owl:Ontology rdf:about="${base}">
-    <owl:versionIRI rdf:resource="${base}/1.0"/>
-  </owl:Ontology>
-`;
-for (const name of classes) {
-  xml += `\n  <owl:Class rdf:about="#${name}">\n`;
-  if (['CPU','Motherboard','PowerSupply'].includes(name)) xml += '    <rdfs:subClassOf rdf:resource="#Component"/>\n';
-  if (name==='Component') xml += `    ${exactData('hasPrice','decimal')}\n`;
-  if (name==='CPU'||name==='Motherboard') xml += `    ${exactObject('hasSocket','Socket')}\n`;
-  if (name==='CPU') xml += `    ${exactData('hasTDP','integer')}\n`;
-  if (name==='PowerSupply') xml += `    ${exactData('hasWattage','integer')}\n`;
-  if (name==='PCConfiguration') for(const [p,c] of [['hasCPU','CPU'],['hasMotherboard','Motherboard'],['hasPowerSupply','PowerSupply']]) xml += `    ${exactObject(p,c)}\n`;
-  xml += '  </owl:Class>\n';
+const root = path.dirname(fileURLToPath(import.meta.url));
+const xsd = 'http://www.w3.org/2001/XMLSchema#';
+// Extend the preserved practice-2 facts; regeneration never reads its own output.
+let xml = fs.readFileSync(path.join(root, 'validation/practice2/PC_Builder.owl'), 'utf8');
+xml = xml.replace('https://example.org/pc-builder/1.0', 'https://example.org/pc-builder/2.0');
+const ref = n => `<rdf:Description rdf:about="#${n}"/>`;
+const group = (kind, members) => `<owl:Class><owl:${kind} rdf:parseType="Collection">${members.join('')}</owl:${kind}></owl:Class>`;
+const union = (...members) => group('unionOf', members);
+const and = (...members) => group('intersectionOf', members);
+const restriction = (p, content) => `<owl:Restriction><owl:onProperty rdf:resource="#${p}"/>${content}</owl:Restriction>`;
+const some = (p, c) => restriction(p, `<owl:someValuesFrom rdf:resource="#${c}"/>`);
+const only = (p, expression) => restriction(p, `<owl:allValuesFrom>${expression}</owl:allValuesFrom>`);
+const value = (p, n) => restriction(p, `<owl:hasValue rdf:resource="#${n}"/>`);
+const cardinality = (p, c, count, kind) => restriction(p,
+  `<owl:${kind} rdf:datatype="${xsd}nonNegativeInteger">${count}</owl:${kind}><owl:onClass rdf:resource="#${c}"/>`);
+const numericRange = (type, facet, number) => `<rdfs:Datatype><owl:onDatatype rdf:resource="${xsd}${type}"/><owl:withRestrictions rdf:parseType="Collection"><rdf:Description><xsd:${facet} rdf:datatype="${xsd}${type}">${number}</xsd:${facet}></rdf:Description></owl:withRestrictions></rdfs:Datatype>`;
+const dataSome = (p, range) => restriction(p, `<owl:someValuesFrom>${range}</owl:someValuesFrom>`);
+function extend(tag, name, content) {
+  const start = xml.indexOf(`<${tag} rdf:about="#${name}">`);
+  if (start < 0) throw new Error(`Missing baseline entity: ${name}`);
+  const end = xml.indexOf(`</${tag}>`, start);
+  xml = xml.slice(0, end) + content + '\n  ' + xml.slice(end);
 }
-for(const group of [['Component','Socket','PCConfiguration'],['CPU','Motherboard','PowerSupply']]) xml += `\n  <owl:AllDisjointClasses><owl:members rdf:parseType="Collection">${group.map(c=>`<rdf:Description rdf:about="#${c}"/>`).join('')}</owl:members></owl:AllDisjointClasses>\n`;
-const ops = [['hasSocket',null,'Socket'],['hasCPU','PCConfiguration','CPU'],['hasMotherboard','PCConfiguration','Motherboard'],['hasPowerSupply','PCConfiguration','PowerSupply']];
-for (const [p,d,r] of ops) {
-  xml += `\n  <owl:ObjectProperty rdf:about="#${p}">\n    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>\n`;
-  xml += d ? `    <rdfs:domain rdf:resource="#${d}"/>\n` : '    <rdfs:domain><owl:Class><owl:unionOf rdf:parseType="Collection"><rdf:Description rdf:about="#CPU"/><rdf:Description rdf:about="#Motherboard"/></owl:unionOf></owl:Class></rdfs:domain>\n';
-  xml += `    <rdfs:range rdf:resource="#${r}"/>\n`;
-  xml += '  </owl:ObjectProperty>\n';
+const subclass = expression => `  <rdfs:subClassOf>${expression}</rdfs:subClassOf>`;
+const additions = [];
+const defined = (name, expression) => additions.push(`  <owl:Class rdf:about="#${name}"><owl:equivalentClass>${expression}</owl:equivalentClass></owl:Class>`);
+const platforms = ['AM4', 'AM5', 'LGA1700'];
+for (const name of ['CPU', 'Motherboard']) extend('owl:Class', name,
+  [some('hasSocket', 'Socket'), only('hasSocket', ref('Socket'))].map(subclass).join('\n'));
+extend('owl:Class', 'Socket', `  <owl:equivalentClass>${group('oneOf', platforms.map(p => ref(`Socket_${p}`)))}</owl:equivalentClass>`);
+extend('owl:Class', 'PCConfiguration', [
+  some('hasComponent', 'CPU'), some('hasComponent', 'Motherboard'), some('hasComponent', 'PowerSupply'),
+  only('hasComponent', union(ref('CPU'), ref('Motherboard'), ref('PowerSupply'))),
+  cardinality('hasComponent', 'Component', 3, 'minQualifiedCardinality'),
+  cardinality('hasComponent', 'Component', 3, 'maxQualifiedCardinality'),
+  restriction('hasPurpose', `<owl:qualifiedCardinality rdf:datatype="${xsd}nonNegativeInteger">1</owl:qualifiedCardinality><owl:onDataRange rdf:resource="#ConfigurationPurpose"/>`)
+].map(subclass).join('\n'));
+
+for (const platform of platforms) {
+  defined(`${platform}CPU`, and(ref('CPU'), value('hasSocket', `Socket_${platform}`)));
+  defined(`${platform}Motherboard`, and(ref('Motherboard'), value('hasSocket', `Socket_${platform}`)));
+  defined(`${platform}Configuration`, and(ref('PCConfiguration'),
+    some('hasCPU', `${platform}CPU`), some('hasMotherboard', `${platform}Motherboard`)));
 }
-for(const [p,d,t] of [['hasTDP','CPU','integer'],['hasWattage','PowerSupply','integer'],['hasPrice','Component','decimal']]) xml += `
-  <owl:DatatypeProperty rdf:about="#${p}">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:domain rdf:resource="#${d}"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#${t}"/>
-  </owl:DatatypeProperty>
-`;
-function individual(name,c,objects=[],data=[]) {
-  xml += `\n  <owl:NamedIndividual rdf:about="#${name}">\n    <rdf:type rdf:resource="#${c}"/>\n`;
-  for(const [p,value] of objects) xml += `    <${p} rdf:resource="#${value}"/>\n`;
-  for(const [p,value,type] of data) xml += `    <${p} rdf:datatype="http://www.w3.org/2001/XMLSchema#${type}">${value}</${p}>\n`;
-  xml += '  </owl:NamedIndividual>\n';
+defined('SocketCompatibleConfiguration', union(...platforms.map(p => ref(`${p}Configuration`))));
+defined('EfficientCPU', and(ref('CPU'), dataSome('hasTDP', numericRange('integer', 'maxInclusive', 65))));
+defined('HighPowerSupply', and(ref('PowerSupply'), dataSome('hasWattage', numericRange('integer', 'minInclusive', 650))));
+defined('EfficientConfiguration', and(ref('PCConfiguration'), some('hasCPU', 'EfficientCPU')));
+defined('OfficeConfiguration', and(ref('PCConfiguration'), restriction('hasPurpose', `<owl:hasValue rdf:datatype="${xsd}string">office</owl:hasValue>`)));
+
+const type = name => `    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#${name}"/>`;
+const characteristics = [type('AsymmetricProperty'), type('IrreflexiveProperty')].join('\n');
+const ops = [
+  ['hasSocket', union(ref('CPU'), ref('Motherboard')), ref('Socket'), 'isSocketOf', false],
+  ['hasCPU', ref('PCConfiguration'), ref('CPU'), 'isCPUOf', true],
+  ['hasMotherboard', ref('PCConfiguration'), ref('Motherboard'), 'isMotherboardOf', true],
+  ['hasPowerSupply', ref('PCConfiguration'), ref('PowerSupply'), 'isPowerSupplyOf', true]
+];
+for (const [name, domain, range, inverse, component] of ops) {
+  extend('owl:ObjectProperty', name, [characteristics, `    <owl:inverseOf rdf:resource="#${inverse}"/>`,
+    ...(component ? ['    <rdfs:subPropertyOf rdf:resource="#hasComponent"/>'] : [])].join('\n'));
+  additions.push(`  <owl:ObjectProperty rdf:about="#${inverse}">
+${type('InverseFunctionalProperty')}
+${characteristics}
+    <rdfs:domain>${range}</rdfs:domain><rdfs:range>${domain}</rdfs:range>
+  </owl:ObjectProperty>`);
 }
-for(const s of sockets) individual(s,'Socket');
-for(const [n,s,t,p] of cpus) individual(n,'CPU',[['hasSocket',s]],[['hasTDP',t,'integer'],['hasPrice',p,'decimal']]);
-for(const [n,s,p] of boards) individual(n,'Motherboard',[['hasSocket',s]],[['hasPrice',p,'decimal']]);
-for(const [n,w,p] of psus) individual(n,'PowerSupply',[],[['hasWattage',w,'integer'],['hasPrice',p,'decimal']]);
-for(const [n,c,m,p] of configs) individual(n,'PCConfiguration',[['hasCPU',c],['hasMotherboard',m],['hasPowerSupply',p]]);
-const names = [...sockets,...cpus.map(x=>x[0]),...boards.map(x=>x[0]),...psus.map(x=>x[0]),...configs.map(x=>x[0])];
-xml += `\n  <owl:AllDifferent><owl:distinctMembers rdf:parseType="Collection">\n${names.map(n=>`    <rdf:Description rdf:about="#${n}"/>`).join('\n')}\n  </owl:distinctMembers></owl:AllDifferent>\n</rdf:RDF>\n`;
-fs.writeFileSync(path.join(out,'PC_Builder.owl'),xml,'utf8');
-console.log(`Saved PC_Builder.owl: 6 classes, 4 object properties, 3 data properties, ${names.length} individuals.`);
+for (const [name, domain, range, inverse] of [
+  ['hasComponent', 'PCConfiguration', 'Component', 'isComponentOf'],
+  ['isComponentOf', 'Component', 'PCConfiguration', null]
+]) additions.push(`  <owl:ObjectProperty rdf:about="#${name}">
+${characteristics}
+    <rdfs:domain rdf:resource="#${domain}"/><rdfs:range rdf:resource="#${range}"/>
+${inverse ? `    <owl:inverseOf rdf:resource="#${inverse}"/>` : ''}
+  </owl:ObjectProperty>`);
+
+additions.push(`  <rdfs:Datatype rdf:about="#PositiveWattage"><owl:equivalentClass>${numericRange('integer', 'minInclusive', 1)}</owl:equivalentClass></rdfs:Datatype>`,
+  `  <rdfs:Datatype rdf:about="#NonNegativePrice"><owl:equivalentClass>${numericRange('decimal', 'minInclusive', 0)}</owl:equivalentClass></rdfs:Datatype>`,
+  `  <rdfs:Datatype rdf:about="#ConfigurationPurpose">
+    <owl:equivalentClass><rdfs:Datatype><owl:oneOf>
+      <rdf:Description><rdf:first rdf:datatype="${xsd}string">office</rdf:first><rdf:rest>
+        <rdf:Description><rdf:first rdf:datatype="${xsd}string">general</rdf:first><rdf:rest>
+          <rdf:Description><rdf:first rdf:datatype="${xsd}string">performance</rdf:first><rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/></rdf:Description>
+        </rdf:rest></rdf:Description>
+      </rdf:rest></rdf:Description>
+    </owl:oneOf></rdfs:Datatype></owl:equivalentClass>
+  </rdfs:Datatype>`,
+  `  <owl:DatatypeProperty rdf:about="#hasPurpose">
+${type('FunctionalProperty')}
+    <rdfs:domain rdf:resource="#PCConfiguration"/><rdfs:range rdf:resource="#ConfigurationPurpose"/>
+  </owl:DatatypeProperty>`);
+for (const [name, datatype] of [['hasTDP', 'PositiveWattage'], ['hasWattage', 'PositiveWattage'], ['hasPrice', 'NonNegativePrice']]) {
+  const pattern = new RegExp(`(<owl:DatatypeProperty rdf:about="#${name}">[\\s\\S]*?<rdfs:range rdf:resource=")[^"]+("/>)`);
+  xml = xml.replace(pattern, `$1#${datatype}$2`);
+}
+for (const [name, purpose] of [
+  ['PC_Office_AM4', 'office'], ['PC_Performance_AM4', 'performance'],
+  ['PC_Modern_AM5', 'general'], ['PC_Intel_LGA1700', 'performance']
+]) extend('owl:NamedIndividual', name, `  <hasPurpose rdf:datatype="${xsd}string">${purpose}</hasPurpose>`);
+
+xml = xml.replace('</rdf:RDF>', additions.join('\n\n') + '\n</rdf:RDF>');
+fs.writeFileSync(path.join(root, 'PC_Builder.owl'), xml, 'utf8');
+console.log('Saved PC_Builder.owl: 20 classes, 10 object properties, 4 data properties, 3 custom datatypes, 18 individuals.');
