@@ -1,0 +1,12 @@
+#title: Професії та заняття
+#defaultView:Table
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?occupation ?occupationLabel WHERE {
+  wd:Q937 wdt:P106 ?occupation .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "uk,en" . }
+}
+ORDER BY ?occupationLabel

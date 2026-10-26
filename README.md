@@ -1,0 +1,27 @@
+# Інтелектуальні мережі
+
+Практичні роботи з концептуального моделювання, OWL, SPARQL, Wikidata та аналізу графів у Python.
+
+| Робота | Тема | Матеріали |
+|---|---|---|
+| 1 | Концептуальна модель PC Builder та UML | [practice1](practice1/) |
+| 2 | Реалізація онтології у Protégé | [Звіт](practice2/REPORT_PRACTICE2.md), [онтологія](practice2/validation/practice2/PC_Builder.owl) |
+| 3 | Формальні умови та обмеження OWL | [Звіт](practice2/REPORT.md), [онтологія](practice2/PC_Builder.owl) |
+| 4 | Правила та розширення онтології | [Онтологія](practice2/practice4/PC_Builder_Practice4.owl) |
+| 5 | SPARQL над початковою та виведеною онтологією | [practice2/practice5](practice2/practice5/) |
+| 6 | Запити до Wikidata та представлення результатів | [practice6](practice6/) |
+| 7 | Географічний граф Wikidata та метрики NetworkX | [practice7](practice7/) |
+
+Практичні 2–5 зберігають структуру спільного проєкту PC Builder. Початкова онтологія практичної 2 винесена до `practice2/validation/practice2/`.
+
+## Практична 7
+
+Варіант 12: географія та адміністративний устрій, числовий фільтр населення P1082 > 1000. Граф містить 2389 вузлів та 4402 ребра; ізольованих вузлів немає.
+
+- [Виконаний Jupyter Notebook](practice7/Практичне_заняття_7_Єрмолович_варіант_12.ipynb)
+- [Python-скрипт](practice7/geography_analysis.py)
+- [Дані та походження](practice7/data/)
+- [Графи, метрики й таблиці](practice7/outputs/)
+- [Запуск і перевірки](practice7/README.md)
+
+Збережений SPARQL-знімок отримано через QLever Wikidata після відповіді HTTP 429 від основного WDQS. Фактичне джерело та контрольні суми записані у даних. Код нового завантаження підтримує обидва endpoint.

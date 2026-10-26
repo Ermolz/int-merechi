@@ -1,0 +1,17 @@
+{
+  "retrieved_at_utc": "2026-10-26T17:07:57.543268+00:00",
+  "endpoint": "https://qlever.dev/api/wikidata",
+  "primary_endpoint": "https://query.wikidata.org/sparql",
+  "primary_endpoint_status": "HTTP 429; Retry-After 1000; query executed on documented alternative QLever",
+  "query_sha256": "103660dd3906986b4173984bd80137ee6c9f733dd29793f6bc1c24a0a1e845b1",
+  "response_sha256": "73f134e43c91a7555cdb16605cd278a82c76b2f77bf826fa001e24ffc03b329f",
+  "labels_endpoint": "https://qlever.dev/api/wikidata",
+  "labels_language_priority": [
+    "uk",
+    "en",
+    "de",
+    "mul"
+  ],
+  "labels_response_sha256": "d213b377c0f71599afc2e873d161f284a181c8bbc0cd4e6de26812d35ce0c604",
+  "labels_query_sha256": "5c95a0f7fd57e425482b58fdf5991c46ac9e7a9a939973d1daffe2e894cd6aba"
+}

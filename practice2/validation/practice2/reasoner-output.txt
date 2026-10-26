@@ -1,0 +1,138 @@
+File: PC_Builder.owl
+OWLAPI: 4.5.29.2024-05-13T12:11:03Z
+Run: 2026-09-12T11:24:32.738056900+03:00
+PASS 6 named domain classes
+PASS 4 object properties
+PASS 3 data properties
+PASS 18 named individuals (minimum 12)
+PASS 20 explicit object-property assertions
+PASS 18 explicit data-property assertions
+PASS OWL 2 DL profile; violations=0
+Reasoner: HermiT 1.4.1.432
+PASS Ontology is consistent
+PASS No unsatisfiable named classes (excluding owl:Nothing)
+PASS Component is populated; inferred instances=11
+  Component: CPU_AM4_105W, CPU_AM4_65W, CPU_AM5_65W, CPU_LGA1700_125W, Motherboard_AM4_A, Motherboard_AM4_B, Motherboard_AM5, Motherboard_LGA1700, PSU_450W, PSU_650W, PSU_750W
+PASS CPU is populated; inferred instances=4
+  CPU: CPU_AM4_105W, CPU_AM4_65W, CPU_AM5_65W, CPU_LGA1700_125W
+PASS Motherboard is populated; inferred instances=4
+  Motherboard: Motherboard_AM4_A, Motherboard_AM4_B, Motherboard_AM5, Motherboard_LGA1700
+PASS PowerSupply is populated; inferred instances=3
+  PowerSupply: PSU_450W, PSU_650W, PSU_750W
+PASS Socket is populated; inferred instances=3
+  Socket: Socket_AM4, Socket_AM5, Socket_LGA1700
+PASS PCConfiguration is populated; inferred instances=4
+  PCConfiguration: PC_Intel_LGA1700, PC_Modern_AM5, PC_Office_AM4, PC_Performance_AM4
+PASS 11 inferred Component instances
+PASS Component hierarchy inferred correctly
+PASS hasSocket has one UNION domain: CPU or Motherboard
+PASS CPU_LGA1700_125W has exactly one explicit hasSocket
+PASS CPU_LGA1700_125W has exactly one explicit hasTDP
+PASS Positive CPU TDP
+PASS CPU not inferred as Motherboard
+PASS CPU_AM4_105W has exactly one explicit hasSocket
+PASS CPU_AM4_105W has exactly one explicit hasTDP
+PASS Positive CPU TDP
+PASS CPU not inferred as Motherboard
+PASS CPU_AM4_65W has exactly one explicit hasSocket
+PASS CPU_AM4_65W has exactly one explicit hasTDP
+PASS Positive CPU TDP
+PASS CPU not inferred as Motherboard
+PASS CPU_AM5_65W has exactly one explicit hasSocket
+PASS CPU_AM5_65W has exactly one explicit hasTDP
+PASS Positive CPU TDP
+PASS CPU not inferred as Motherboard
+PASS Motherboard_AM4_B has exactly one explicit hasSocket
+PASS Motherboard_AM4_A has exactly one explicit hasSocket
+PASS Motherboard_LGA1700 has exactly one explicit hasSocket
+PASS Motherboard_AM5 has exactly one explicit hasSocket
+PASS PSU_750W has exactly one explicit hasWattage
+PASS Positive PSU Wattage
+PASS PSU_450W has exactly one explicit hasWattage
+PASS Positive PSU Wattage
+PASS PSU_650W has exactly one explicit hasWattage
+PASS Positive PSU Wattage
+PASS Motherboard_AM4_B has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS CPU_LGA1700_125W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS CPU_AM4_105W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS PSU_750W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS Motherboard_AM4_A has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS CPU_AM4_65W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS CPU_AM5_65W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS Motherboard_LGA1700 has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS PSU_450W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS PSU_650W has exactly one explicit hasPrice
+PASS Nonnegative component price
+PASS Motherboard_AM5 has exactly one explicit hasPrice
+PASS Nonnegative component price
+
+DATA CHECKS (procedural, not OWL entailments; only the simplified assignment criteria)
+PASS PC_Intel_LGA1700 has exactly one explicit hasCPU
+PASS PC_Intel_LGA1700 has exactly one explicit hasMotherboard
+PASS PC_Intel_LGA1700 has exactly one explicit hasPowerSupply
+PASS CPU_LGA1700_125W has exactly one explicit hasSocket
+PASS Motherboard_LGA1700 has exactly one explicit hasSocket
+PASS CPU_LGA1700_125W has exactly one explicit hasTDP
+PASS PSU_750W has exactly one explicit hasWattage
+PASS CPU_LGA1700_125W has exactly one explicit hasPrice
+PASS Motherboard_LGA1700 has exactly one explicit hasPrice
+PASS PSU_750W has exactly one explicit hasPrice
+PASS PC_Intel_LGA1700: CPU and motherboard socket match
+PASS PC_Intel_LGA1700: PSU Wattage >= CPU TDP
+RESULT PC_Intel_LGA1700 | socket=Socket_LGA1700 | TDP=125 W | Wattage=750 W | total=560.00 fictional units
+PASS PC_Modern_AM5 has exactly one explicit hasCPU
+PASS PC_Modern_AM5 has exactly one explicit hasMotherboard
+PASS PC_Modern_AM5 has exactly one explicit hasPowerSupply
+PASS CPU_AM5_65W has exactly one explicit hasSocket
+PASS Motherboard_AM5 has exactly one explicit hasSocket
+PASS CPU_AM5_65W has exactly one explicit hasTDP
+PASS PSU_650W has exactly one explicit hasWattage
+PASS CPU_AM5_65W has exactly one explicit hasPrice
+PASS Motherboard_AM5 has exactly one explicit hasPrice
+PASS PSU_650W has exactly one explicit hasPrice
+PASS PC_Modern_AM5: CPU and motherboard socket match
+PASS PC_Modern_AM5: PSU Wattage >= CPU TDP
+RESULT PC_Modern_AM5 | socket=Socket_AM5 | TDP=65 W | Wattage=650 W | total=510.00 fictional units
+PASS PC_Office_AM4 has exactly one explicit hasCPU
+PASS PC_Office_AM4 has exactly one explicit hasMotherboard
+PASS PC_Office_AM4 has exactly one explicit hasPowerSupply
+PASS CPU_AM4_65W has exactly one explicit hasSocket
+PASS Motherboard_AM4_A has exactly one explicit hasSocket
+PASS CPU_AM4_65W has exactly one explicit hasTDP
+PASS PSU_450W has exactly one explicit hasWattage
+PASS CPU_AM4_65W has exactly one explicit hasPrice
+PASS Motherboard_AM4_A has exactly one explicit hasPrice
+PASS PSU_450W has exactly one explicit hasPrice
+PASS PC_Office_AM4: CPU and motherboard socket match
+PASS PC_Office_AM4: PSU Wattage >= CPU TDP
+RESULT PC_Office_AM4 | socket=Socket_AM4 | TDP=65 W | Wattage=450 W | total=260.00 fictional units
+PASS PC_Performance_AM4 has exactly one explicit hasCPU
+PASS PC_Performance_AM4 has exactly one explicit hasMotherboard
+PASS PC_Performance_AM4 has exactly one explicit hasPowerSupply
+PASS CPU_AM4_105W has exactly one explicit hasSocket
+PASS Motherboard_AM4_B has exactly one explicit hasSocket
+PASS CPU_AM4_105W has exactly one explicit hasTDP
+PASS PSU_650W has exactly one explicit hasWattage
+PASS CPU_AM4_105W has exactly one explicit hasPrice
+PASS Motherboard_AM4_B has exactly one explicit hasPrice
+PASS PSU_650W has exactly one explicit hasPrice
+PASS PC_Performance_AM4: CPU and motherboard socket match
+PASS PC_Performance_AM4: PSU Wattage >= CPU TDP
+RESULT PC_Performance_AM4 | socket=Socket_AM4 | TDP=105 W | Wattage=650 W | total=440.00 fictional units
+
+NEGATIVE CONTROLS: temporary in-memory copies; final OWL is never modified.
+PASS NEGATIVE CONTROL detected: CPU asserted as disjoint Motherboard
+PASS NEGATIVE CONTROL detected: Two distinct sockets on a functional property
+PASS NEGATIVE CONTROL detected: Two separate hasSocket domains create an intersection
+PASS NEGATIVE CONTROL detected: Text instead of integer TDP
+
+ALL CHECKS PASSED. HermiT was executed outside the Protege GUI using its installed libraries.

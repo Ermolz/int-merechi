@@ -1,0 +1,17 @@
+PREFIX : <https://example.org/pc-builder#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?socket
+       (COUNT(DISTINCT ?cpu) AS ?cpuCount)
+       (SUM(?price) AS ?priceSum)
+       (AVG(?tdp) AS ?averageTDP)
+       (SAMPLE(?cpu) AS ?sampleCPU)
+WHERE {
+  ?cpu a :Component ;
+       :hasSocket ?socket ;
+       :hasPrice ?price ;
+       :hasTDP ?tdp .
+}
+GROUP BY ?socket
+ORDER BY DESC(?cpuCount) ASC(?socket)

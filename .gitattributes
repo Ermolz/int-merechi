@@ -1,0 +1,14 @@
+* text=auto
+*.py text eol=lf
+*.ps1 text eol=lf
+*.mjs text eol=lf
+*.java text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.rq text eol=lf
+*.json text eol=lf
+*.ipynb text eol=lf
+*.owl text eol=lf
+*.graphml text eol=lf
+practice7/** -text
+practice6/** -text

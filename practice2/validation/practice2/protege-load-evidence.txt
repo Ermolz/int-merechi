@@ -1,0 +1,5 @@
+2026-09-12 11:13:26.123 [FelixDispatchQueue] INFO  ProtegeApplication    Processing command line argument: PC_Builder.owl
+2026-09-12 11:13:27.857 [AWT-EventQueue-0] INFO  ProtegeApplication    Creating and setting up (default) editor kit for PC_Builder.owl
+2026-09-12 11:13:28.388 [AWT-EventQueue-0] INFO  OWLModelManagerImpl    Loading ontology from PC_Builder.owl
+2026-09-12 11:13:28.637 [pool-3-thread-1] INFO  OntologyLoader    Finished loading PC_Builder.owl
+2026-09-12 11:13:28.656 [AWT-EventQueue-0] INFO  OWLModelManagerImpl    Loading for ontology and imports closure successfully completed in 276 ms

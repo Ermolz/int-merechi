@@ -1,0 +1,66 @@
+[
+  {
+    "query": "queries/01_birth.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 1,
+    "query_sha256": "a60e52e5fdb391eb7dd01e21bfe04dbe2a13ddff8ddaa4a9646770abba38b3c5",
+    "result_sha256": "6f0534cb7c9d9125a2996cac18f93b31f1ca6cf5a75dfc626d7f5060b22a1519"
+  },
+  {
+    "query": "queries/02_citizenship.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 7,
+    "query_sha256": "0dee21521f70efeae04787b2535c540d0c01f15849cf0a303bd4d4155f0dba64",
+    "result_sha256": "e1a81f5574ec0974ac947fe97c3623d0c3cf7f38b883c40e4efbe54681cf5d7c"
+  },
+  {
+    "query": "queries/03_occupations.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 14,
+    "query_sha256": "82eb116c5f8ef2f771161659d213a720af8ca0cddadeb05b5277097676887eae",
+    "result_sha256": "9a0d4ad9f42e506fbaca0b5a8bae3812406b9c64b87b82af0f40aa526ac2efe7"
+  },
+  {
+    "query": "queries/04_citizenship_periods.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 7,
+    "query_sha256": "2b21dde7e2f353ceb654b2fc8dadaab96c97611cfbcaae2b812f21963a7e28bb",
+    "result_sha256": "be2a4f7d92b12f4ba691217872bc951ec5ade8f39599d56345537250a2ed9023"
+  },
+  {
+    "query": "queries/05_physicists_gallery.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 6,
+    "query_sha256": "fa0ae0b7c9dd50123c26964ce8d1dcc428ae8e1add57fcc39eb96e1faa1f138f",
+    "result_sha256": "7d88ec356f01a642068150207ae13bd3f223f1a2bace05e93a84c25066d5fff0"
+  },
+  {
+    "query": "queries/06_audio_video.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 6,
+    "query_sha256": "0388128b2a915bf1ea155fdff2ad8dae4addd5063e755cb02f9783743262f336",
+    "result_sha256": "b6dc85915b4549528ac238918e6d28eba504a0123f291898cfd1680e5372465e"
+  },
+  {
+    "query": "queries/07_bern_museums_map.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 34,
+    "query_sha256": "564d264047b7c5e57d6cf13a6a1322bf616cdff4f4be06ad5983e5f0453ece3e",
+    "result_sha256": "5c8d12c9af03e46fed5a3f4fa3b674b89cf2650ab5449dfc871749c9fa3bec45"
+  },
+  {
+    "query": "queries/08_employment_statistics.rq",
+    "date": "26.10.2026",
+    "environment": "Wikidata Query Service web interface",
+    "rows": 3,
+    "query_sha256": "0075971bcc6001b1828955ecac18e2d8a0a273af8c89124e63fc838a90dc4c94",
+    "result_sha256": "e6ac8818c482c2a7fe21a4d76bfac079eccbc948c11ead4f2b14739ed702933b"
+  }
+]

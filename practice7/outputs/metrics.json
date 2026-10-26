@@ -1,0 +1,103 @@
+{
+  "variant": 12,
+  "domain": 5,
+  "filter_variant": "A",
+  "global": {
+    "nodes": 2389,
+    "edges": 4402,
+    "density_directed": 0.0007716130534071221,
+    "density_undirected": 0.0015432261068142443,
+    "degree_mean": 3.6852239430724154,
+    "degree_min": 2,
+    "degree_max": 2388,
+    "in_degree_mean": 1.8426119715362077,
+    "out_degree_mean": 1.8426119715362077,
+    "average_clustering_undirected": 0.8848733896831128,
+    "transitivity_undirected": 0.0021126694077986943,
+    "weak_components": 1,
+    "strong_components": 2389,
+    "isolates": 0
+  },
+  "paths_undirected": {
+    "min": 1,
+    "max": 2,
+    "mean": 1.9984567738931858,
+    "reachable_ordered_pairs": 5704932,
+    "possible_ordered_pairs": 5704932,
+    "reachable_fraction": 1.0,
+    "length_histogram": {
+      "1": 8804,
+      "2": 5696128
+    }
+  },
+  "paths_directed_reachable": {
+    "min": 1,
+    "max": 1,
+    "mean": 1.0,
+    "reachable_ordered_pairs": 4402,
+    "possible_ordered_pairs": 5704932,
+    "reachable_fraction": 0.0007716130534071221,
+    "length_histogram": {
+      "1": 4402
+    }
+  },
+  "semantic": {
+    "node_types": {
+      "entropy_bits": 0.8247510638251131,
+      "normalized_entropy": 0.520359985456976,
+      "simpson_diversity": 0.3809030541649926
+    },
+    "relation_types": {
+      "entropy_bits": 1.4395085943941364,
+      "normalized_entropy": 0.9082288027250875,
+      "simpson_diversity": 0.6083323820633345
+    },
+    "local_relation_diversity_mean": 0.5984492509198596
+  },
+  "node_type_counts": {
+    "Country": 1,
+    "City": 1778,
+    "AdministrativeTerritory": 610
+  },
+  "relation_type_counts": {
+    "CityCountry": 1778,
+    "CityAdmin": 2014,
+    "AdminCountry": 610
+  },
+  "predicate_counts": {
+    "P17": 2388,
+    "P131": 2014
+  },
+  "sampling": {
+    "source_rows": 2040,
+    "source_cities": 1798,
+    "source_administrative_units": 636,
+    "discarded_role_conflict_rows": 26
+  },
+  "provenance": {
+    "retrieved_at_utc": "2026-10-26T17:07:57.543268+00:00",
+    "endpoint": "https://qlever.dev/api/wikidata",
+    "primary_endpoint": "https://query.wikidata.org/sparql",
+    "primary_endpoint_status": "HTTP 429; Retry-After 1000; query executed on documented alternative QLever",
+    "query_sha256": "103660dd3906986b4173984bd80137ee6c9f733dd29793f6bc1c24a0a1e845b1",
+    "response_sha256": "73f134e43c91a7555cdb16605cd278a82c76b2f77bf826fa001e24ffc03b329f",
+    "labels_endpoint": "https://qlever.dev/api/wikidata",
+    "labels_language_priority": [
+      "uk",
+      "en",
+      "de",
+      "mul"
+    ],
+    "labels_response_sha256": "d213b377c0f71599afc2e873d161f284a181c8bbc0cd4e6de26812d35ce0c604",
+    "labels_query_sha256": "5c95a0f7fd57e425482b58fdf5991c46ac9e7a9a939973d1daffe2e894cd6aba"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "networkx": "3.7",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "SPARQLWrapper": "2.0.0"
+  }
+}

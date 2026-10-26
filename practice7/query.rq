@@ -1,0 +1,20 @@
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT DISTINCT ?city ?population ?admin WHERE {
+  {
+    SELECT ?city (MAX(?pop) AS ?population) WHERE {
+      ?city wdt:P17 wd:Q183 ;
+            wdt:P31/wdt:P279* wd:Q515 ;
+            wdt:P1082 ?pop .
+      FILTER(?pop > 1000)
+    }
+    GROUP BY ?city
+    ORDER BY ?city
+    LIMIT 1800
+  }
+  ?city wdt:P131 ?admin .
+  ?admin wdt:P17 wd:Q183 ;
+         wdt:P31/wdt:P279* wd:Q56061 .
+  FILTER(?admin != ?city && ?admin != wd:Q183)
+}
+ORDER BY ?city ?admin

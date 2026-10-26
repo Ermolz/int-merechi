@@ -1,0 +1,13 @@
+#title: Галерея фізиків
+#defaultView:ImageGrid
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?person ?personLabel ?image WHERE {
+  VALUES ?person { wd:Q937 wd:Q7186 wd:Q7085 wd:Q9021 wd:Q17714 }
+  ?person wdt:P18 ?image .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "uk,en" . }
+}
+ORDER BY ?personLabel

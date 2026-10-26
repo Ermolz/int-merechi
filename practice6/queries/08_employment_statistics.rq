@@ -1,0 +1,35 @@
+#title: Установи фізиків у 1900–1950 роках
+#defaultView:Table
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+
+SELECT ?personLabel ?birthplaceLabel ?employerCount
+       ?exampleEmployerLabel ?hasImage WHERE {
+  {
+    SELECT ?person ?birthplace
+           (COUNT(DISTINCT ?employer) AS ?employerCount)
+           (SAMPLE(?employer) AS ?exampleEmployer)
+           (SAMPLE(?picture) AS ?image) WHERE {
+      hint:Query hint:optimizer "None" .
+      VALUES ?person { wd:Q937 wd:Q7186 wd:Q7085 wd:Q9021 wd:Q17714 }
+      ?person wdt:P569 ?birth ; wdt:P19 ?birthplace ; p:P108 ?job .
+      ?job ps:P108 ?employer ; pq:P580 ?start ; pq:P582 ?end .
+      FILTER (?birth < "1900-01-01T00:00:00Z"^^xsd:dateTime)
+      FILTER (?start < "1951-01-01T00:00:00Z"^^xsd:dateTime &&
+              ?end >= "1900-01-01T00:00:00Z"^^xsd:dateTime)
+      OPTIONAL { ?person wdt:P18 ?picture . }
+    }
+    GROUP BY ?person ?birthplace
+    HAVING (COUNT(DISTINCT ?employer) >= 1)
+  }
+  BIND(BOUND(?image) AS ?hasImage)
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "uk,en" . }
+}
+ORDER BY DESC(?employerCount) ?personLabel

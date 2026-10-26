@@ -1,0 +1,19 @@
+#title: Аудіо та відеоресурси фізиків
+#defaultView:Table
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?person ?personLabel ?kind ?media WHERE {
+  VALUES ?person { wd:Q937 wd:Q7186 wd:Q7085 wd:Q9021 wd:Q17714 }
+  VALUES (?property ?kind) {
+    (wdt:P51 "Аудіо P51")
+    (wdt:P990 "Голос P990")
+    (wdt:P443 "Вимова P443")
+    (wdt:P10 "Відео P10")
+  }
+  ?person ?property ?media .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "uk,en" . }
+}
+ORDER BY ?personLabel ?kind ?media

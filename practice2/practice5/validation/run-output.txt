@@ -1,0 +1,48 @@
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:validation/lib/logback-classic.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:plugins/rdf-library-3.0.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
+PASS practice4 source contains six SWRL rules
+PASS asserted projection is OWL 2 DL
+PASS HermiT source consistency
+PASS inferred materialization is OWL 2 DL
+PASS materialized ontology is consistent
+PASS five SELECT queries
+QUERY 01_cpu_catalog asserted=4 inferred=4
+ASSERTED [cpu, socket, tdp] [[CPU_AM4_105W, Socket_AM4, 105], [CPU_AM4_65W, Socket_AM4, 65], [CPU_AM5_65W, Socket_AM5, 65], [CPU_LGA1700_125W, Socket_LGA1700, 125]]
+SNAP [cpu, socket, tdp] [[CPU_AM4_105W, Socket_AM4, 105], [CPU_AM4_65W, Socket_AM4, 65], [CPU_AM5_65W, Socket_AM5, 65], [CPU_LGA1700_125W, Socket_LGA1700, 125]]
+PASS 01_cpu_catalog asserted row count
+PASS 01_cpu_catalog Snap row count
+PASS 01_cpu_catalog agrees with standard SPARQL over materialized closure
+QUERY 02_office_am4_budget asserted=0 inferred=1
+ASSERTED [pc, cpu, purpose, totalPrice] []
+SNAP [pc, cpu, purpose, totalPrice] [[PC_Office_AM4, CPU_AM4_65W, office, 260.00]]
+PASS 02_office_am4_budget asserted row count
+PASS 02_office_am4_budget Snap row count
+PASS 02_office_am4_budget agrees with standard SPARQL over materialized closure
+QUERY 03_cpu_optional_usage asserted=4 inferred=4
+ASSERTED [cpu, price, tdp, pc, purpose] [[CPU_AM4_105W, 220.00, 105, , ], [CPU_AM4_65W, 120.00, 65, , ], [CPU_AM5_65W, 250.00, 65, , ], [CPU_LGA1700_125W, 300.00, 125, , ]]
+SNAP [cpu, price, tdp, pc, purpose] [[CPU_AM4_105W, 220.00, 105, PC_Performance_AM4, performance], [CPU_AM4_65W, 120.00, 65, PC_Office_AM4, office], [CPU_AM5_65W, 250.00, 65, PC_Modern_AM5, general], [CPU_LGA1700_125W, 300.00, 125, PC_Intel_LGA1700, performance]]
+PASS 03_cpu_optional_usage asserted row count
+PASS 03_cpu_optional_usage Snap row count
+PASS 03_cpu_optional_usage agrees with standard SPARQL over materialized closure
+PASS OPTIONAL preserves all four CPUs without inverse assertions
+PASS OPTIONAL inverse links are bound after inference
+QUERY 04_socket_statistics asserted=0 inferred=3
+ASSERTED [socket, cpuCount, priceSum, averageTDP, sampleCPU] []
+SNAP [socket, cpuCount, priceSum, averageTDP, sampleCPU] [[Socket_AM4, 2, 340.0, 85.0, CPU_AM4_105W], [Socket_AM5, 1, 250.0, 65.0, CPU_AM5_65W], [Socket_LGA1700, 1, 300.0, 125.0, CPU_LGA1700_125W]]
+PASS 04_socket_statistics asserted row count
+PASS 04_socket_statistics Snap row count
+PASS 04_socket_statistics agrees with standard SPARQL over materialized closure
+PASS SAMPLE is a member of Socket_AM4
+PASS SAMPLE is a member of Socket_AM5
+PASS SAMPLE is a member of Socket_LGA1700
+QUERY 05_configuration_totals asserted=0 inferred=4
+ASSERTED [pc, componentCount, totalPrice, averagePrice] []
+SNAP [pc, componentCount, totalPrice, averagePrice] [[PC_Office_AM4, 3, 260.0, 86.66666666666667], [PC_Performance_AM4, 3, 440.0, 146.66666666666666], [PC_Modern_AM5, 3, 510.0, 170.0], [PC_Intel_LGA1700, 3, 560.0, 186.66666666666666]]
+PASS 05_configuration_totals asserted row count
+PASS 05_configuration_totals Snap row count
+PASS 05_configuration_totals agrees with standard SPARQL over materialized closure
+PASS incompatible string/number FILTER rejects rows in both engines
+PASS all five queries executed by the real Basic SPARQL and Snap SPARQL engines

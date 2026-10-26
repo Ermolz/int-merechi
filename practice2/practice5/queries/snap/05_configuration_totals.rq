@@ -1,0 +1,15 @@
+PREFIX : <https://example.org/pc-builder#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?pc
+       (COUNT(DISTINCT ?component) AS ?componentCount)
+       (SUM(?price) AS ?totalPrice)
+       (AVG(?price) AS ?averagePrice)
+WHERE {
+  ?pc a :PCConfiguration ;
+      :hasComponent ?component .
+  ?component :hasPrice ?price .
+}
+GROUP BY ?pc
+ORDER BY ASC(?totalPrice) ASC(?pc)

@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="PC Builder" id="pc-builder">
+    <mxGraphModel dx="900" dy="900" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Component" value="Component" style="swimlane;startSize=36;horizontal=1;rounded=0;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontStyle=1;fillColor=#eef1f5;swimlaneFillColor=#ffffff;strokeColor=#313b45;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="255" y="20" width="210" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="Component_attrs" value="hasPrice: decimal" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=18;fontFamily=Arial;strokeColor=none;fillColor=none;" vertex="1" parent="Component">
+          <mxGeometry x="0" y="36" width="210" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="CPU" value="CPU" style="swimlane;startSize=36;horizontal=1;rounded=0;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontStyle=1;fillColor=#eef1f5;swimlaneFillColor=#ffffff;strokeColor=#313b45;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="25" y="205" width="190" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="CPU_attrs" value="hasTDP: integer" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=18;fontFamily=Arial;strokeColor=none;fillColor=none;" vertex="1" parent="CPU">
+          <mxGeometry x="0" y="36" width="190" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Motherboard" value="Motherboard" style="swimlane;startSize=36;horizontal=1;rounded=0;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontStyle=1;fillColor=#eef1f5;swimlaneFillColor=#ffffff;strokeColor=#313b45;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="265" y="205" width="190" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="PowerSupply" value="PowerSupply" style="swimlane;startSize=36;horizontal=1;rounded=0;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontStyle=1;fillColor=#eef1f5;swimlaneFillColor=#ffffff;strokeColor=#313b45;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="505" y="205" width="190" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="PowerSupply_attrs" value="hasWattage: integer" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontSize=18;fontFamily=Arial;strokeColor=none;fillColor=none;" vertex="1" parent="PowerSupply">
+          <mxGeometry x="0" y="36" width="190" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Socket" value="Socket" style="swimlane;startSize=36;horizontal=1;rounded=0;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontStyle=1;fillColor=#eef1f5;swimlaneFillColor=#ffffff;strokeColor=#313b45;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="55" y="415" width="190" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="PCConfiguration" value="PCConfiguration" style="swimlane;startSize=36;horizontal=1;rounded=0;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontStyle=1;fillColor=#eef1f5;swimlaneFillColor=#ffffff;strokeColor=#313b45;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="325" y="610" width="270" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=block;endFill=0;endSize=14;exitX=0.5;exitY=0.0;exitPerimeter=0;entryX=0.16666666666666666;entryY=1.0;entryPerimeter=0;" edge="1" parent="1" source="CPU" target="Component">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="147" />
+              <mxPoint x="290" y="147" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=block;endFill=0;endSize=14;exitX=0.5;exitY=0.0;exitPerimeter=0;entryX=0.5;entryY=1.0;entryPerimeter=0;" edge="1" parent="1" source="Motherboard" target="Component">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=block;endFill=0;endSize=14;exitX=0.5;exitY=0.0;exitPerimeter=0;entryX=0.8333333333333334;entryY=1.0;entryPerimeter=0;" edge="1" parent="1" source="PowerSupply" target="Component">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="147" />
+              <mxPoint x="430" y="147" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=open;endFill=0;endSize=14;exitX=0.5;exitY=1.0;exitPerimeter=0;entryX=0.34210526315789475;entryY=0.0;entryPerimeter=0;" edge="1" parent="1" source="CPU" target="Socket">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label3_0" value="hasSocket" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="138.309814453125" y="335" width="87.38037109375" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="label3_1" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="129.9921875" y="292" width="32.015625" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="label3_2" value="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="127.55078125" y="386" width="16.8984375" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=open;endFill=0;endSize=14;exitX=0.23684210526315788;exitY=1.0;exitPerimeter=0;entryX=0.8421052631578947;entryY=0.0;entryPerimeter=0;" edge="1" parent="1" source="Motherboard" target="Socket">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="361" />
+              <mxPoint x="215" y="361" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label4_0" value="hasSocket" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="231.309814453125" y="373" width="87.38037109375" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="label4_1" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="319.9921875" y="292" width="32.015625" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="label4_2" value="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="221.55078125" y="386" width="16.8984375" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=open;endFill=0;endSize=14;exitX=0.0;exitY=0.5;exitPerimeter=0;entryX=0.0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="PCConfiguration" target="CPU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="7" y="644" />
+              <mxPoint x="7" y="247" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label5_0" value="hasCPU" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="118.34912109375" y="612" width="71.3017578125" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="label5_1" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="276.9921875" y="614" width="32.015625" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="label5_2" value="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="8.55078125" y="221" width="16.8984375" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=open;endFill=0;endSize=14;exitX=0.5;exitY=0.0;exitPerimeter=0;entryX=0.7631578947368421;entryY=1.0;entryPerimeter=0;" edge="1" parent="1" source="PCConfiguration" target="Motherboard">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="536" />
+              <mxPoint x="410" y="536" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label6_0" value="hasMotherboard" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="359.10107421875" y="446" width="131.7978515625" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="label6_1" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="469.9921875" y="576" width="32.015625" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="label6_2" value="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="416.55078125" y="293" width="16.8984375" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=none;rounded=0;html=1;strokeColor=#313b45;strokeWidth=1.5;endArrow=open;endFill=0;endSize=14;exitX=1.0;exitY=0.5;exitPerimeter=0;entryX=0.5;entryY=1.0;entryPerimeter=0;" edge="1" parent="1" source="PCConfiguration" target="PowerSupply">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="644" />
+              <mxPoint x="680" y="330" />
+              <mxPoint x="600" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label7_0" value="hasPowerSupply" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=17;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="542.212646484375" y="487" width="135.57470703125" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="label7_1" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="606.9921875" y="614" width="32.015625" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="label7_2" value="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="606.55078125" y="293" width="16.8984375" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

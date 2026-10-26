@@ -1,0 +1,17 @@
+#title: Часові межі громадянства
+#defaultView:Table
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?country ?countryLabel ?start ?end WHERE {
+  wd:Q937 p:P27 ?statement .
+  ?statement ps:P27 ?country .
+  OPTIONAL { ?statement pq:P580 ?start . }
+  OPTIONAL { ?statement pq:P582 ?end . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "uk,en" . }
+}
+ORDER BY ?start ?countryLabel

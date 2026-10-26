@@ -1,0 +1,12 @@
+#title: Дата і місце народження
+#defaultView:Table
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+
+SELECT ?person ?personLabel ?birth ?birthplace ?birthplaceLabel WHERE {
+  VALUES ?person { wd:Q937 }
+  ?person wdt:P569 ?birth ; wdt:P19 ?birthplace .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "uk,en" . }
+}
