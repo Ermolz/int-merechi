@@ -1,0 +1,6 @@
+﻿qid,label,type,degree,degree_centrality,pagerank,community
+Q183,Німеччина,Country,2388,1.0,0.24474424833259326,0
+Q6339,Рудні Гори,AdministrativeTerritory,28,0.01172529313232831,0.0028697037165665573,0
+Q6308,Лейпциг,AdministrativeTerritory,20,0.008375209380234505,0.0020711775013436736,9
+Q7166,Хайльбронн,AdministrativeTerritory,19,0.007956448911222781,0.0018972573138971377,1
+Q8541,Людвігсбург,AdministrativeTerritory,18,0.007537688442211055,0.0018292490040365996,5

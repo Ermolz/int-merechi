@@ -1,0 +1,15 @@
+{
+  "source_graph": "practice7/outputs/variant12_geography.json",
+  "input_copy": "data/geography_graph.json",
+  "input_sha256": "5ec861b5967eb325c6dfae0ce7a36993b95d44e8da5a34e86f539d990616561e",
+  "nodes": 2389,
+  "edges": 4402,
+  "source_metadata": {
+    "name": "Wikidata Geography Variant 12",
+    "variant": 12,
+    "domain": 5,
+    "numeric_filter": "P1082 > 1000",
+    "source": "https://qlever.dev/api/wikidata",
+    "retrieved_at_utc": "2026-10-26T17:07:57.543268+00:00"
+  }
+}

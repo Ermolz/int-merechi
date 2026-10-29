@@ -1,0 +1,36 @@
+﻿city,candidate_admin,length,typed_path,count,specific_p131_evidence
+Q253696,Q15852582,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q253696,Q15852582,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q253696,Q15852582,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q253696,Q15852582,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q258974,Q15852582,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q258974,Q15852582,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q258974,Q15852582,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q258974,Q15852582,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q50872,Q1687656,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q50872,Q1687656,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q50872,Q1687656,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q50872,Q1687656,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q50880,Q1687656,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q50880,Q1687656,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q50880,Q1687656,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q50880,Q1687656,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q14815,Q478740,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q14815,Q478740,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q14815,Q478740,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q14815,Q478740,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q15986,Q478740,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q15986,Q478740,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q15986,Q478740,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q15986,Q478740,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q16087,Q478740,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q16087,Q478740,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q16087,Q478740,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q16087,Q478740,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q517174,Q478740,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q517174,Q478740,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q517174,Q478740,3,City -P131-> AdministrativeTerritory <-P131- City -P131-> AdministrativeTerritory,3,True
+Q517174,Q478740,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,3,False
+Q253696,Q10401,2,City -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q253696,Q10401,3,City -P131-> AdministrativeTerritory -P17-> Country <-P17- AdministrativeTerritory,1,False
+Q253696,Q10401,3,City -P17-> Country <-P17- City -P131-> AdministrativeTerritory,2,False

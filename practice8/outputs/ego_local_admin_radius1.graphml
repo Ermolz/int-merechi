@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d4" for="node" attr.name="population" attr.type="double"/>
+<key id="d3" for="node" attr.name="wikidata_uri" attr.type="string"/>
+<key id="d2" for="node" attr.name="class_qid" attr.type="string"/>
+<key id="d1" for="node" attr.name="type" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Q1326264">
+  <data key="d0">Лаутер-Бернсбах</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q1326264</data>
+  <data key="d4">8107.0</data>
+</node>
+<node id="Q15474520">
+  <data key="d0">Покау-Ленгефельд</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q15474520</data>
+  <data key="d4">7197.0</data>
+</node>
+<node id="Q183">
+  <data key="d0">Німеччина</data>
+  <data key="d1">Country</data>
+  <data key="d2">Q6256</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q183</data>
+</node>
+<node id="Q57876">
+  <data key="d0">Еренфрідерсдорф</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57876</data>
+  <data key="d4">4320.0</data>
+</node>
+<node id="Q57881">
+  <data key="d0">Айбеншток</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57881</data>
+  <data key="d4">6701.0</data>
+</node>
+<node id="Q57885">
+  <data key="d0">Ельтерляйн</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57885</data>
+  <data key="d4">2614.0</data>
+</node>
+<node id="Q57891">
+  <data key="d0">Гаєр</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57891</data>
+  <data key="d4">3239.0</data>
+</node>
+<node id="Q57897">
+  <data key="d0">Грюнгайн-Баєрфельд</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57897</data>
+  <data key="d4">5483.0</data>
+</node>
+<node id="Q57903">
+  <data key="d0">Йоганнгеоргенштадт</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57903</data>
+  <data key="d4">3471.0</data>
+</node>
+<node id="Q57908">
+  <data key="d0">Єштадт</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57908</data>
+  <data key="d4">2376.0</data>
+</node>
+<node id="Q57921">
+  <data key="d0">Лесніц</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57921</data>
+  <data key="d4">7445.0</data>
+</node>
+<node id="Q57924">
+  <data key="d0">Лугау</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57924</data>
+  <data key="d4">7345.0</data>
+</node>
+<node id="Q57926">
+  <data key="d0">Обервізенталь</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57926</data>
+  <data key="d4">1907.0</data>
+</node>
+<node id="Q57929">
+  <data key="d0">Ельсніц</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57929</data>
+  <data key="d4">10782.0</data>
+</node>
+<node id="Q57933">
+  <data key="d0">Ольбернгау</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57933</data>
+  <data key="d4">9800.0</data>
+</node>
+<node id="Q57936">
+  <data key="d0">Шайбенберг</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57936</data>
+  <data key="d4">1978.0</data>
+</node>
+<node id="Q57939">
+  <data key="d0">Шлеттау</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57939</data>
+  <data key="d4">2173.0</data>
+</node>
+<node id="Q57941">
+  <data key="d0">Шнееберг</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57941</data>
+  <data key="d4">13372.0</data>
+</node>
+<node id="Q57944">
+  <data key="d0">Аннаберг-Бухгольц</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57944</data>
+  <data key="d4">18882.0</data>
+</node>
+<node id="Q57951">
+  <data key="d0">Марієнберг</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57951</data>
+  <data key="d4">15948.0</data>
+</node>
+<node id="Q57953">
+  <data key="d0">Шварценберг</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57953</data>
+  <data key="d4">15158.0</data>
+</node>
+<node id="Q57955">
+  <data key="d0">Штольберг</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57955</data>
+  <data key="d4">11031.0</data>
+</node>
+<node id="Q57993">
+  <data key="d0">Тальгайм</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57993</data>
+  <data key="d4">5899.0</data>
+</node>
+<node id="Q57996">
+  <data key="d0">Тум</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57996</data>
+  <data key="d4">4655.0</data>
+</node>
+<node id="Q57997">
+  <data key="d0">Волькенштайн</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q57997</data>
+  <data key="d4">3750.0</data>
+</node>
+<node id="Q58002">
+  <data key="d0">Цвеніц</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q58002</data>
+  <data key="d4">11244.0</data>
+</node>
+<node id="Q58006">
+  <data key="d0">Чопау</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q58006</data>
+  <data key="d4">8692.0</data>
+</node>
+<node id="Q59564401">
+  <data key="d0">Aue-Bad Schlema</data>
+  <data key="d1">City</data>
+  <data key="d2">Q515</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q59564401</data>
+  <data key="d4">18968.0</data>
+</node>
+<node id="Q6339">
+  <data key="d0">Рудні Гори</data>
+  <data key="d1">AdministrativeTerritory</data>
+  <data key="d2">Q56061</data>
+  <data key="d3">https://www.wikidata.org/wiki/Q6339</data>
+</node>
+<edge source="Q1326264" target="Q183"/>
+<edge source="Q1326264" target="Q6339"/>
+<edge source="Q15474520" target="Q183"/>
+<edge source="Q15474520" target="Q6339"/>
+<edge source="Q183" target="Q57876"/>
+<edge source="Q183" target="Q57881"/>
+<edge source="Q183" target="Q57885"/>
+<edge source="Q183" target="Q57891"/>
+<edge source="Q183" target="Q57897"/>
+<edge source="Q183" target="Q57903"/>
+<edge source="Q183" target="Q57908"/>
+<edge source="Q183" target="Q57921"/>
+<edge source="Q183" target="Q57924"/>
+<edge source="Q183" target="Q57926"/>
+<edge source="Q183" target="Q57929"/>
+<edge source="Q183" target="Q57933"/>
+<edge source="Q183" target="Q57936"/>
+<edge source="Q183" target="Q57939"/>
+<edge source="Q183" target="Q57941"/>
+<edge source="Q183" target="Q57944"/>
+<edge source="Q183" target="Q57951"/>
+<edge source="Q183" target="Q57953"/>
+<edge source="Q183" target="Q57955"/>
+<edge source="Q183" target="Q57993"/>
+<edge source="Q183" target="Q57996"/>
+<edge source="Q183" target="Q57997"/>
+<edge source="Q183" target="Q58002"/>
+<edge source="Q183" target="Q58006"/>
+<edge source="Q183" target="Q59564401"/>
+<edge source="Q183" target="Q6339"/>
+<edge source="Q57876" target="Q6339"/>
+<edge source="Q57881" target="Q6339"/>
+<edge source="Q57885" target="Q6339"/>
+<edge source="Q57891" target="Q6339"/>
+<edge source="Q57897" target="Q6339"/>
+<edge source="Q57903" target="Q6339"/>
+<edge source="Q57908" target="Q6339"/>
+<edge source="Q57921" target="Q6339"/>
+<edge source="Q57924" target="Q6339"/>
+<edge source="Q57926" target="Q6339"/>
+<edge source="Q57929" target="Q6339"/>
+<edge source="Q57933" target="Q6339"/>
+<edge source="Q57936" target="Q6339"/>
+<edge source="Q57939" target="Q6339"/>
+<edge source="Q57941" target="Q6339"/>
+<edge source="Q57944" target="Q6339"/>
+<edge source="Q57951" target="Q6339"/>
+<edge source="Q57953" target="Q6339"/>
+<edge source="Q57955" target="Q6339"/>
+<edge source="Q57993" target="Q6339"/>
+<edge source="Q57996" target="Q6339"/>
+<edge source="Q57997" target="Q6339"/>
+<edge source="Q58002" target="Q6339"/>
+<edge source="Q58006" target="Q6339"/>
+<edge source="Q59564401" target="Q6339"/>
+</graph></graphml>

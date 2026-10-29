@@ -1,0 +1,15 @@
+{
+  "semantic": {
+    "shortest_path": [
+      "Q59775092",
+      "Q183",
+      "Q59564401"
+    ],
+    "shortest_path_text": "An der Schmücke (Q59775092) —P17→ Німеччина (Q183) ←P17— Aue-Bad Schlema (Q59564401)"
+  },
+  "link_prediction": {
+    "hypothesis": "Прюм (Q253696) may have P131 to Südeifel (Q15852582).",
+    "scope": "Exact enumeration of simple paths with 2 or 3 edges; longer paths are excluded.",
+    "interpretation": "Common country and co-membership paths support structural proximity, not verified administrative inclusion."
+  }
+}

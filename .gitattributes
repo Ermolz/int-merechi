@@ -11,4 +11,5 @@
 *.owl text eol=lf
 *.graphml text eol=lf
 practice7/** -text
+practice8/** -text
 practice6/** -text

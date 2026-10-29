@@ -1,0 +1,3 @@
+﻿step,traversal_from,traversal_to,rdf_source,rdf_source_label,rdf_target,rdf_target_label,property,relation,property_uri,edge_key,traversal_direction
+1,Q59775092,Q183,Q59775092,An der Schmücke,Q183,Німеччина,P17,CityCountry,http://www.wikidata.org/prop/direct/P17,P17,along
+2,Q183,Q59564401,Q59564401,Aue-Bad Schlema,Q183,Німеччина,P17,CityCountry,http://www.wikidata.org/prop/direct/P17,P17,against

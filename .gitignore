@@ -6,6 +6,7 @@
 !/practice2/
 !/practice6/
 !/practice7/
+!/practice8/
 
 .*
 !.gitignore

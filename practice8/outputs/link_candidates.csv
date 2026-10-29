@@ -1,0 +1,10 @@
+﻿city,city_label,candidate_admin,admin_label,role,direct_edge_present,shortest_length,paths_length2,paths_length3,all_paths_up_to3,specific_p131_paths,supporting_cities,jaccard_peer_cities
+Q253696,Прюм,Q15852582,Südeifel,candidate,False,2,1,7,8,3,3,0.75
+Q258974,Бітбург,Q15852582,Südeifel,candidate,False,2,1,7,8,3,3,0.75
+Q50872,Меккерн,Q1687656,Jerichow District,candidate,False,2,1,7,8,3,3,0.75
+Q50880,Гоммерн,Q1687656,Jerichow District,candidate,False,2,1,7,8,3,3,0.75
+Q14815,Вайсенфельс,Q478740,Unstruttal,candidate,False,2,1,7,8,3,3,0.375
+Q15986,Наумбург,Q478740,Unstruttal,candidate,False,2,1,7,8,3,3,0.375
+Q16087,Цайц,Q478740,Unstruttal,candidate,False,2,1,7,8,3,3,0.375
+Q517174,Лютцен,Q478740,Unstruttal,candidate,False,2,1,7,8,3,3,0.375
+Q253696,Прюм,Q10401,Ліндау,comparison_without_specific_paths,False,2,1,3,4,0,0,0.0

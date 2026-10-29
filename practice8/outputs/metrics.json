@@ -1,0 +1,83 @@
+{
+  "variant": 12,
+  "nodes": 2389,
+  "directed_edges": 4402,
+  "undirected_edges": 4402,
+  "communities": {
+    "count": 214,
+    "resolution": 1.0,
+    "modularity": 0.4022595879242862,
+    "type_nmi": 0.015903219276571217,
+    "type_purity": 0.7484303055671829,
+    "majority_type_baseline": 0.7442444537463374,
+    "city_primary_admin_nmi": 0.8678511771430646,
+    "sampling_country_groups": 1,
+    "intercommunity_edges": 1759,
+    "intercommunity_predicates": {
+      "P17": 1759
+    },
+    "graph_bridges": 0,
+    "articulation_points": [
+      "Q183"
+    ],
+    "multiple_admin_cities": 225
+  },
+  "resilience": {
+    "attack_ranking": "PageRank on the initial undirected graph; no recomputation",
+    "targeted_order": [
+      "Q183",
+      "Q6339",
+      "Q6308",
+      "Q7166",
+      "Q8541"
+    ],
+    "random_trials": 500,
+    "targeted_final_components": 476,
+    "targeted_final_largest": 27,
+    "random_final_components_mean": 1.0,
+    "random_final_largest_mean": 2384.0,
+    "random_largest_le_targeted_fraction": 0.0,
+    "random_includes_main_hub_trials": 0,
+    "main_hub_is_universal": true,
+    "random_main_hub_hit_probability": 0.002092925910422771,
+    "expected_random_main_hub_hits": 1.0464629552113855,
+    "probability_no_main_hub_hit_in_trials": 0.35079279050248185
+  },
+  "semantic": {
+    "source": "Q59775092",
+    "target": "Q59564401",
+    "shortest_path_length": 2,
+    "undirected_diameter": 2,
+    "directed_reachable": false,
+    "main_hub": "Q183",
+    "main_ego_nodes": 2389,
+    "main_ego_fraction": 1.0,
+    "local_hub": "Q6339",
+    "local_ego_nodes": 29
+  },
+  "link_prediction": {
+    "missing_pairs_with_specific_paths": 1312,
+    "cutoff_edges": 3,
+    "selected_city": "Q253696",
+    "selected_admin": "Q15852582",
+    "selected_specific_paths": 3,
+    "selected_all_paths_up_to3": 8,
+    "positive_prediction_is_verified": false
+  },
+  "config": {
+    "seed": 12,
+    "resolution": 1.0,
+    "attack_steps": 5,
+    "random_trials": 500,
+    "path_cutoff": 3
+  },
+  "versions": {
+    "python": "3.12.14",
+    "networkx": "3.7",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "pandas": "3.0.1",
+    "scipy": "1.18.1"
+  },
+  "input_sha256": "5ec861b5967eb325c6dfae0ce7a36993b95d44e8da5a34e86f539d990616561e"
+}
