@@ -1,0 +1,41 @@
+﻿model,query,query_label,neighbor,label,class,cosine,shared_specific,jaccard_specific
+Node2Vec,Q253696,Прюм,Q553503,Ехтернахербрюк,City,0.8827190399169922,1,0.5
+Node2Vec,Q253696,Прюм,Q543370,Ноєрбург,City,0.8626096844673157,1,0.5
+Node2Vec,Q253696,Прюм,Q544146,Боллендорф,City,0.8433666825294495,1,0.5
+Node2Vec,Q253696,Прюм,Q258974,Бітбург,City,0.8229689598083496,1,1.0
+Node2Vec,Q253696,Прюм,Q570414,Ніденштайн,City,0.638416051864624,0,0.0
+Node2Vec,Q59564401,Aue-Bad Schlema,Q57941,Шнееберг,City,0.8927139639854431,1,1.0
+Node2Vec,Q59564401,Aue-Bad Schlema,Q57885,Ельтерляйн,City,0.8923903703689575,1,1.0
+Node2Vec,Q59564401,Aue-Bad Schlema,Q1326264,Лаутер-Бернсбах,City,0.8755283951759338,1,1.0
+Node2Vec,Q59564401,Aue-Bad Schlema,Q57881,Айбеншток,City,0.8711129426956177,1,1.0
+Node2Vec,Q59564401,Aue-Bad Schlema,Q58002,Цвеніц,City,0.8686232566833496,1,1.0
+Node2Vec,Q6339,Рудні Гори,Q9378649,Überlingen VVG,AdministrativeTerritory,0.49584001302719116,0,0.0
+Node2Vec,Q6339,Рудні Гори,Q261407,Баден (земля),AdministrativeTerritory,0.4956236779689789,0,0.0
+Node2Vec,Q6339,Рудні Гори,Q20219,Röbel-Müritz,AdministrativeTerritory,0.4861997663974762,0,0.0
+Node2Vec,Q6339,Рудні Гори,Q453982,Neukloster-Warin,AdministrativeTerritory,0.48521846532821655,0,0.0
+Node2Vec,Q6339,Рудні Гори,Q450095,Artland,AdministrativeTerritory,0.48514997959136963,0,0.0
+Node2Vec,Q15852582,Südeifel,Q8580,Бітбург-Прюм,AdministrativeTerritory,0.8960795998573303,3,0.6
+Node2Vec,Q15852582,Südeifel,Q6295,Райніш-Бергішер,AdministrativeTerritory,0.6510928869247437,0,0.0
+Node2Vec,Q15852582,Südeifel,Q11838007,Boxberg VVG,AdministrativeTerritory,0.5656067132949829,0,0.0
+Node2Vec,Q15852582,Südeifel,Q10408,Унтералльгой,AdministrativeTerritory,0.5492508411407471,0,0.0
+Node2Vec,Q15852582,Südeifel,Q10445,Форхгайм,AdministrativeTerritory,0.5433750748634338,0,0.0
+TransE,Q253696,Прюм,Q553503,Ехтернахербрюк,City,0.7177628874778748,1,0.5
+TransE,Q253696,Прюм,Q543370,Ноєрбург,City,0.5270942449569702,1,0.5
+TransE,Q253696,Прюм,Q10933,Френденберг,City,0.4976579546928406,0,0.0
+TransE,Q253696,Прюм,Q534634,Наббург,City,0.4894486963748932,0,0.0
+TransE,Q253696,Прюм,Q14914,Кесфельд,City,0.43772029876708984,0,0.0
+TransE,Q59564401,Aue-Bad Schlema,Q50859,Тангергютте,City,0.623816967010498,0,0.0
+TransE,Q59564401,Aue-Bad Schlema,Q57953,Шварценберг,City,0.5917119979858398,1,1.0
+TransE,Q59564401,Aue-Bad Schlema,Q15474520,Покау-Ленгефельд,City,0.5913556218147278,1,1.0
+TransE,Q59564401,Aue-Bad Schlema,Q57891,Гаєр,City,0.5682478547096252,1,1.0
+TransE,Q59564401,Aue-Bad Schlema,Q3813,Марль,City,0.5475634932518005,0,0.0
+TransE,Q6339,Рудні Гори,Q6245,Везель,AdministrativeTerritory,0.5035668611526489,0,0.0
+TransE,Q6339,Рудні Гори,Q6022,Геттінген,AdministrativeTerritory,0.49993231892585754,0,0.0
+TransE,Q6339,Рудні Гори,Q7906,Лімбург-Вайльбург,AdministrativeTerritory,0.4812391400337219,0,0.0
+TransE,Q6339,Рудні Гори,Q6064,Берде,AdministrativeTerritory,0.45701199769973755,0,0.0
+TransE,Q6339,Рудні Гори,Q9392590,Steinheim-Murr GVV,AdministrativeTerritory,0.43767088651657104,0,0.0
+TransE,Q15852582,Südeifel,Q8580,Бітбург-Прюм,AdministrativeTerritory,0.7834578156471252,3,0.6
+TransE,Q15852582,Südeifel,Q10539,Ердінґ (район),AdministrativeTerritory,0.5433779954910278,0,0.0
+TransE,Q15852582,Südeifel,Q6187,Штайнфурт,AdministrativeTerritory,0.5348829627037048,0,0.0
+TransE,Q15852582,Südeifel,Q6125,Східний Прігніц-Руппін,AdministrativeTerritory,0.500887930393219,0,0.0
+TransE,Q15852582,Südeifel,Q45880,Amt Stargarder Land,AdministrativeTerritory,0.497504323720932,0,0.0

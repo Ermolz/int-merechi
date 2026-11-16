@@ -1,0 +1,9 @@
+﻿model,query,query_label,shared_context_at5,mean_specific_jaccard
+Node2Vec,Q253696,Прюм,0.8,0.5
+Node2Vec,Q59564401,Aue-Bad Schlema,1.0,1.0
+Node2Vec,Q6339,Рудні Гори,0.0,0.0
+Node2Vec,Q15852582,Südeifel,0.2,0.12
+TransE,Q253696,Прюм,0.4,0.2
+TransE,Q59564401,Aue-Bad Schlema,0.6,0.6
+TransE,Q6339,Рудні Гори,0.0,0.0
+TransE,Q15852582,Südeifel,0.2,0.12

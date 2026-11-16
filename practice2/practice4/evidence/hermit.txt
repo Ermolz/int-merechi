@@ -1,0 +1,22 @@
+HermiT runs on copies in memory with the three numerical SWRL rules removed.
+
+File: PC_Builder_Practice4.owl
+Rules: 6, numeric: 3
+PC_Office_AM4 hasCompatibleMotherboard Motherboard_AM4_A
+PC_Office_AM4 usesSocket Socket_AM4
+PC_Office_AM4 hasTotalPrice 260.00
+HermiT 1.4.1.432, consistent before test: true
+WithinBudgetConfiguration -> PC_Intel_LGA1700, PC_Modern_AM5, PC_Office_AM4
+usesSocket value Socket_AM4 -> PC_Office_AM4, PC_Performance_AM4
+hasCompatibleMotherboard value Motherboard_AM4_A -> PC_Office_AM4
+File: PC_Builder_Practice4_check.owl
+Rules: 6, numeric: 3
+PC_Office_AM4 hasCompatibleMotherboard Motherboard_AM4_A
+PC_Office_AM4 usesSocket Socket_AM4
+PC_Office_AM4 hasTotalPrice 260.00
+HermiT 1.4.1.432, consistent before test: true
+WithinBudgetConfiguration -> PC_Intel_LGA1700, PC_Modern_AM5, PC_Office_AM4
+usesSocket value Socket_AM4 -> PC_Office_AM4, PC_Performance_AM4
+hasCompatibleMotherboard value Motherboard_AM4_A -> PC_Office_AM4
+CPU(?x) -> Motherboard(?x), consistent: false
+After removing the conflict, consistent: true

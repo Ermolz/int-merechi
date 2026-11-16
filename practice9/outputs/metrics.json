@@ -1,0 +1,24 @@
+{
+  "variant": 12,
+  "nodes": 2389,
+  "triples": 4402,
+  "relations": {
+    "P131": 0,
+    "P17": 1
+  },
+  "input_sha256": "5ec861b5967eb325c6dfae0ce7a36993b95d44e8da5a34e86f539d990616561e",
+  "config": {
+    "seed": 12,
+    "dimensions": 32,
+    "walk_length": 20,
+    "num_walks": 8,
+    "window": 5,
+    "word2vec_epochs": 10,
+    "transe_epochs": 100,
+    "batch_size": 256,
+    "learning_rate": 0.01,
+    "negatives": 5
+  },
+  "loss_first": 0.8437736829121908,
+  "loss_last": 0.0010714699658112498
+}
