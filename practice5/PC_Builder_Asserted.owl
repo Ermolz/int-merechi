@@ -1,0 +1,793 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://example.org/pc-builder#"
+     xml:base="https://example.org/pc-builder"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://example.org/pc-builder/practice5/asserted"/>
+
+<rdfs:Datatype rdf:about="https://example.org/pc-builder#ConfigurationPurpose">
+        <owl:equivalentClass>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>general</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>office</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>performance</rdf:first>
+                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </owl:equivalentClass>
+    </rdfs:Datatype>
+
+<rdfs:Datatype rdf:about="https://example.org/pc-builder#NonNegativePrice">
+        <owl:equivalentClass>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</xsd:minInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </owl:equivalentClass>
+    </rdfs:Datatype>
+
+<rdfs:Datatype rdf:about="https://example.org/pc-builder#PositiveWattage">
+        <owl:equivalentClass>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xsd:minInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </owl:equivalentClass>
+    </rdfs:Datatype>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#compatibleWith">
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#CPU"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#Motherboard"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#hasCPU">
+        <rdfs:subPropertyOf rdf:resource="https://example.org/pc-builder#hasComponent"/>
+        <owl:inverseOf rdf:resource="https://example.org/pc-builder#isCPUOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#CPU"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#hasCompatibleMotherboard">
+        <rdfs:subPropertyOf rdf:resource="https://example.org/pc-builder#hasMotherboard"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#Motherboard"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#hasComponent">
+        <owl:inverseOf rdf:resource="https://example.org/pc-builder#isComponentOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#Component"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#hasMotherboard">
+        <rdfs:subPropertyOf rdf:resource="https://example.org/pc-builder#hasComponent"/>
+        <owl:inverseOf rdf:resource="https://example.org/pc-builder#isMotherboardOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#Motherboard"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#hasPowerSupply">
+        <rdfs:subPropertyOf rdf:resource="https://example.org/pc-builder#hasComponent"/>
+        <owl:inverseOf rdf:resource="https://example.org/pc-builder#isPowerSupplyOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#hasSocket">
+        <owl:inverseOf rdf:resource="https://example.org/pc-builder#isSocketOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#Socket"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#isCPUOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#CPU"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#isComponentOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#Component"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#isMotherboardOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#Motherboard"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#isPowerSupplyOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#isSocketOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#Socket"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="https://example.org/pc-builder#usesSocket">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#Socket"/>
+    </owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="https://example.org/pc-builder#hasBudget">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#NonNegativePrice"/>
+    </owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="https://example.org/pc-builder#hasPrice">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#Component"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#NonNegativePrice"/>
+    </owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="https://example.org/pc-builder#hasPurpose">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#ConfigurationPurpose"/>
+    </owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="https://example.org/pc-builder#hasTDP">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#CPU"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PositiveWattage"/>
+    </owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="https://example.org/pc-builder#hasTotalPrice">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#NonNegativePrice"/>
+    </owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="https://example.org/pc-builder#hasWattage">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+        <rdfs:range rdf:resource="https://example.org/pc-builder#PositiveWattage"/>
+    </owl:DatatypeProperty>
+
+<owl:Class rdf:about="https://example.org/pc-builder#AM4CPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                        <owl:hasValue rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#AM4Configuration">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#PCConfiguration"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasCPU"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#AM4CPU"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasMotherboard"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#AM4Motherboard"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#AM4Motherboard">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                        <owl:hasValue rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#AM5CPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                        <owl:hasValue rdf:resource="https://example.org/pc-builder#Socket_AM5"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#AM5Configuration">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#PCConfiguration"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasCPU"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#AM5CPU"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasMotherboard"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#AM5Motherboard"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#AM5Motherboard">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                        <owl:hasValue rdf:resource="https://example.org/pc-builder#Socket_AM5"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#CPU">
+        <rdfs:subClassOf rdf:resource="https://example.org/pc-builder#Component"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#Socket"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                <owl:allValuesFrom rdf:resource="https://example.org/pc-builder#Socket"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#Socket"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasTDP"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#Component">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasPrice"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#EfficientCPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasTDP"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">65</xsd:maxInclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#EfficientConfiguration">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#PCConfiguration"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasCPU"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#EfficientCPU"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#HighPowerSupply">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#PowerSupply"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasWattage"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">650</xsd:minInclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#LGA1700CPU">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                        <owl:hasValue rdf:resource="https://example.org/pc-builder#Socket_LGA1700"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#LGA1700Configuration">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#PCConfiguration"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasCPU"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#LGA1700CPU"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasMotherboard"/>
+                        <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#LGA1700Motherboard"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#LGA1700Motherboard">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                        <owl:hasValue rdf:resource="https://example.org/pc-builder#Socket_LGA1700"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#Motherboard">
+        <rdfs:subClassOf rdf:resource="https://example.org/pc-builder#Component"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#Socket"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                <owl:allValuesFrom rdf:resource="https://example.org/pc-builder#Socket"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasSocket"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#Socket"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#OfficeConfiguration">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#PCConfiguration"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://example.org/pc-builder#hasPurpose"/>
+                        <owl:hasValue>office</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#PCConfiguration">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasComponent"/>
+                <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#CPU"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasComponent"/>
+                <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#Motherboard"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasComponent"/>
+                <owl:someValuesFrom rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasComponent"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+                            <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+                            <rdf:Description rdf:about="https://example.org/pc-builder#PowerSupply"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasComponent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#Component"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasCPU"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#CPU"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasMotherboard"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#Motherboard"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasPowerSupply"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasComponent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://example.org/pc-builder#Component"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasPurpose"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="https://example.org/pc-builder#ConfigurationPurpose"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#PowerAdequateConfiguration">
+        <rdfs:subClassOf rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#PowerSupply">
+        <rdfs:subClassOf rdf:resource="https://example.org/pc-builder#Component"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://example.org/pc-builder#hasWattage"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#Socket">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Socket_AM4"/>
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Socket_AM5"/>
+                    <rdf:Description rdf:about="https://example.org/pc-builder#Socket_LGA1700"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#SocketCompatibleConfiguration">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://example.org/pc-builder#AM4Configuration"/>
+                    <rdf:Description rdf:about="https://example.org/pc-builder#AM5Configuration"/>
+                    <rdf:Description rdf:about="https://example.org/pc-builder#LGA1700Configuration"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+<owl:Class rdf:about="https://example.org/pc-builder#WithinBudgetConfiguration">
+        <rdfs:subClassOf rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+    </owl:Class>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#CPU_AM4_105W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#CPU"/>
+        <compatibleWith rdf:resource="https://example.org/pc-builder#Motherboard_AM4_A"/>
+        <compatibleWith rdf:resource="https://example.org/pc-builder#Motherboard_AM4_B"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">220.00</hasPrice>
+        <hasTDP rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">105</hasTDP>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#CPU_AM4_65W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#CPU"/>
+        <compatibleWith rdf:resource="https://example.org/pc-builder#Motherboard_AM4_A"/>
+        <compatibleWith rdf:resource="https://example.org/pc-builder#Motherboard_AM4_B"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.00</hasPrice>
+        <hasTDP rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">65</hasTDP>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#CPU_AM5_65W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#CPU"/>
+        <compatibleWith rdf:resource="https://example.org/pc-builder#Motherboard_AM5"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_AM5"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">250.00</hasPrice>
+        <hasTDP rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">65</hasTDP>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#CPU_LGA1700_125W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#CPU"/>
+        <compatibleWith rdf:resource="https://example.org/pc-builder#Motherboard_LGA1700"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_LGA1700"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300.00</hasPrice>
+        <hasTDP rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">125</hasTDP>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Motherboard_AM4_A">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Motherboard"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.00</hasPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Motherboard_AM4_B">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Motherboard"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">140.00</hasPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Motherboard_AM5">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Motherboard"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_AM5"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">180.00</hasPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Motherboard_LGA1700">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Motherboard"/>
+        <hasSocket rdf:resource="https://example.org/pc-builder#Socket_LGA1700"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">160.00</hasPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PC_Intel_LGA1700">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerAdequateConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#WithinBudgetConfiguration"/>
+        <hasCPU rdf:resource="https://example.org/pc-builder#CPU_LGA1700_125W"/>
+        <hasCompatibleMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_LGA1700"/>
+        <hasMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_LGA1700"/>
+        <hasPowerSupply rdf:resource="https://example.org/pc-builder#PSU_750W"/>
+        <usesSocket rdf:resource="https://example.org/pc-builder#Socket_LGA1700"/>
+        <hasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">600</hasBudget>
+        <hasPurpose>performance</hasPurpose>
+        <hasTotalPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">560.00</hasTotalPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PC_Modern_AM5">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerAdequateConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#WithinBudgetConfiguration"/>
+        <hasCPU rdf:resource="https://example.org/pc-builder#CPU_AM5_65W"/>
+        <hasCompatibleMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_AM5"/>
+        <hasMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_AM5"/>
+        <hasPowerSupply rdf:resource="https://example.org/pc-builder#PSU_650W"/>
+        <usesSocket rdf:resource="https://example.org/pc-builder#Socket_AM5"/>
+        <hasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">510</hasBudget>
+        <hasPurpose>general</hasPurpose>
+        <hasTotalPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">510.00</hasTotalPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PC_Office_AM4">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerAdequateConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#WithinBudgetConfiguration"/>
+        <hasCPU rdf:resource="https://example.org/pc-builder#CPU_AM4_65W"/>
+        <hasCompatibleMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_AM4_A"/>
+        <hasMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_AM4_A"/>
+        <hasPowerSupply rdf:resource="https://example.org/pc-builder#PSU_450W"/>
+        <usesSocket rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+        <hasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300</hasBudget>
+        <hasPurpose>office</hasPurpose>
+        <hasTotalPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">260.00</hasTotalPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PC_Performance_AM4">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PCConfiguration"/>
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerAdequateConfiguration"/>
+        <hasCPU rdf:resource="https://example.org/pc-builder#CPU_AM4_105W"/>
+        <hasCompatibleMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_AM4_B"/>
+        <hasMotherboard rdf:resource="https://example.org/pc-builder#Motherboard_AM4_B"/>
+        <hasPowerSupply rdf:resource="https://example.org/pc-builder#PSU_650W"/>
+        <usesSocket rdf:resource="https://example.org/pc-builder#Socket_AM4"/>
+        <hasBudget rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">400</hasBudget>
+        <hasPurpose>performance</hasPurpose>
+        <hasTotalPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">440.00</hasTotalPrice>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PSU_450W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.00</hasPrice>
+        <hasWattage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">450</hasWattage>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PSU_650W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">80.00</hasPrice>
+        <hasWattage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">650</hasWattage>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#PSU_750W">
+        <rdf:type rdf:resource="https://example.org/pc-builder#PowerSupply"/>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.00</hasPrice>
+        <hasWattage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">750</hasWattage>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Socket_AM4">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Socket"/>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Socket_AM5">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Socket"/>
+    </owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="https://example.org/pc-builder#Socket_LGA1700">
+        <rdf:type rdf:resource="https://example.org/pc-builder#Socket"/>
+    </owl:NamedIndividual>
+
+<rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://example.org/pc-builder#CPU"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PowerSupply"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://example.org/pc-builder#Component"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PCConfiguration"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Socket"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://example.org/pc-builder#CPU_AM4_105W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#CPU_AM4_65W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#CPU_AM5_65W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#CPU_LGA1700_125W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard_AM4_A"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard_AM4_B"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard_AM5"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Motherboard_LGA1700"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PC_Intel_LGA1700"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PC_Modern_AM5"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PC_Office_AM4"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PC_Performance_AM4"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PSU_450W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PSU_650W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#PSU_750W"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Socket_AM4"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Socket_AM5"/>
+            <rdf:Description rdf:about="https://example.org/pc-builder#Socket_LGA1700"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>

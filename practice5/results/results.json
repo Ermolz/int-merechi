@@ -1,0 +1,275 @@
+{
+  "assertedObjectAssertions": 34,
+  "inferredObjectAssertions": 78,
+  "assertedClassAssertions": 25,
+  "inferredClassAssertions": 59,
+  "newNamedFacts": 78,
+  "source": "practice4/PC_Builder_Practice4.owl",
+  "inferenceReasoner": "HermiT 1.4.1.432",
+  "snapReasoner": "Structural over materialized HermiT named facts",
+  "typeErrorFilterRowsAsserted": 0,
+  "typeErrorFilterRowsInferred": 0,
+  "queries": {
+    "01_cpu_catalog": {
+      "asserted": {
+        "columns": [
+          "cpu",
+          "socket",
+          "tdp"
+        ],
+        "rows": [
+          [
+            "CPU_AM4_105W",
+            "Socket_AM4",
+            "105"
+          ],
+          [
+            "CPU_AM4_65W",
+            "Socket_AM4",
+            "65"
+          ],
+          [
+            "CPU_AM5_65W",
+            "Socket_AM5",
+            "65"
+          ],
+          [
+            "CPU_LGA1700_125W",
+            "Socket_LGA1700",
+            "125"
+          ]
+        ]
+      },
+      "inferred": {
+        "columns": [
+          "cpu",
+          "socket",
+          "tdp"
+        ],
+        "rows": [
+          [
+            "CPU_AM4_105W",
+            "Socket_AM4",
+            "105"
+          ],
+          [
+            "CPU_AM4_65W",
+            "Socket_AM4",
+            "65"
+          ],
+          [
+            "CPU_AM5_65W",
+            "Socket_AM5",
+            "65"
+          ],
+          [
+            "CPU_LGA1700_125W",
+            "Socket_LGA1700",
+            "125"
+          ]
+        ]
+      },
+      "materializedCrossCheck": true
+    },
+    "02_office_am4_budget": {
+      "asserted": {
+        "columns": [
+          "pc",
+          "cpu",
+          "purpose",
+          "totalPrice"
+        ],
+        "rows": []
+      },
+      "inferred": {
+        "columns": [
+          "pc",
+          "cpu",
+          "purpose",
+          "totalPrice"
+        ],
+        "rows": [
+          [
+            "PC_Office_AM4",
+            "CPU_AM4_65W",
+            "office",
+            "260.00"
+          ]
+        ]
+      },
+      "materializedCrossCheck": true
+    },
+    "03_cpu_optional_usage": {
+      "asserted": {
+        "columns": [
+          "cpu",
+          "price",
+          "tdp",
+          "pc",
+          "purpose"
+        ],
+        "rows": [
+          [
+            "CPU_AM4_105W",
+            "220.00",
+            "105",
+            "",
+            ""
+          ],
+          [
+            "CPU_AM4_65W",
+            "120.00",
+            "65",
+            "",
+            ""
+          ],
+          [
+            "CPU_AM5_65W",
+            "250.00",
+            "65",
+            "",
+            ""
+          ],
+          [
+            "CPU_LGA1700_125W",
+            "300.00",
+            "125",
+            "",
+            ""
+          ]
+        ]
+      },
+      "inferred": {
+        "columns": [
+          "cpu",
+          "price",
+          "tdp",
+          "pc",
+          "purpose"
+        ],
+        "rows": [
+          [
+            "CPU_AM4_105W",
+            "220.00",
+            "105",
+            "PC_Performance_AM4",
+            "performance"
+          ],
+          [
+            "CPU_AM4_65W",
+            "120.00",
+            "65",
+            "PC_Office_AM4",
+            "office"
+          ],
+          [
+            "CPU_AM5_65W",
+            "250.00",
+            "65",
+            "PC_Modern_AM5",
+            "general"
+          ],
+          [
+            "CPU_LGA1700_125W",
+            "300.00",
+            "125",
+            "PC_Intel_LGA1700",
+            "performance"
+          ]
+        ]
+      },
+      "materializedCrossCheck": true
+    },
+    "04_socket_statistics": {
+      "asserted": {
+        "columns": [
+          "socket",
+          "cpuCount",
+          "priceSum",
+          "averageTDP",
+          "sampleCPU"
+        ],
+        "rows": []
+      },
+      "inferred": {
+        "columns": [
+          "socket",
+          "cpuCount",
+          "priceSum",
+          "averageTDP",
+          "sampleCPU"
+        ],
+        "rows": [
+          [
+            "Socket_AM4",
+            "2",
+            "340.0",
+            "85.0",
+            "CPU_AM4_105W"
+          ],
+          [
+            "Socket_AM5",
+            "1",
+            "250.0",
+            "65.0",
+            "CPU_AM5_65W"
+          ],
+          [
+            "Socket_LGA1700",
+            "1",
+            "300.0",
+            "125.0",
+            "CPU_LGA1700_125W"
+          ]
+        ]
+      },
+      "materializedCrossCheck": true
+    },
+    "05_configuration_totals": {
+      "asserted": {
+        "columns": [
+          "pc",
+          "componentCount",
+          "totalPrice",
+          "averagePrice"
+        ],
+        "rows": []
+      },
+      "inferred": {
+        "columns": [
+          "pc",
+          "componentCount",
+          "totalPrice",
+          "averagePrice"
+        ],
+        "rows": [
+          [
+            "PC_Office_AM4",
+            "3",
+            "260.0",
+            "86.66666666666667"
+          ],
+          [
+            "PC_Performance_AM4",
+            "3",
+            "440.0",
+            "146.66666666666666"
+          ],
+          [
+            "PC_Modern_AM5",
+            "3",
+            "510.0",
+            "170.0"
+          ],
+          [
+            "PC_Intel_LGA1700",
+            "3",
+            "560.0",
+            "186.66666666666666"
+          ]
+        ]
+      },
+      "materializedCrossCheck": true
+    }
+  }
+}

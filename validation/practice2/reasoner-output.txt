@@ -1,4 +1,4 @@
-File: E:\Academy of Mohyla\Course4_Stage1\int-merechi\practice2\PC_Builder.owl
+File: PC_Builder.owl
 OWLAPI: 4.5.29.2024-05-13T12:11:03Z
 Run: 2026-09-12T11:24:32.738056900+03:00
 PASS 6 named domain classes

@@ -1,0 +1,9 @@
+{
+  "snapPluginVersion": "6.0.0",
+  "snapPluginPath": "plugins/snap-sparql-query-plugin.jar",
+  "snapPluginSHA256": "49e953bc5d4022cbb5931bacb7d64e555c94abf4b8f0ff346a0a4ea223f064dd",
+  "snapDownloadURL": "https://raw.githubusercontent.com/protegeproject/autoupdate/master/snap-sparql-query/6.0.0/snap-sparql-query-plugin.jar",
+  "standardPluginVersion": "3.0.0",
+  "execution": "Plugin APIs outside GUI",
+  "GUIVerification": "Not confirmed"
+}

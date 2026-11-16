@@ -1,0 +1,5 @@
+"cpu","price","tdp","pc","purpose"
+"CPU_AM4_105W","220.00","105","PC_Performance_AM4","performance"
+"CPU_AM4_65W","120.00","65","PC_Office_AM4","office"
+"CPU_AM5_65W","250.00","65","PC_Modern_AM5","general"
+"CPU_LGA1700_125W","300.00","125","PC_Intel_LGA1700","performance"
